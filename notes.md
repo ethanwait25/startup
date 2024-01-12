@@ -5,17 +5,17 @@ This document will be used to keep notes relating to the content and assignments
 
 # Git and GitHub
 * Git – version control for a directory
-* git init – creates a .git directory, giving the directory Git functionality
-* git add – stages files or directories to be committed to .git
-* git commit – commits all staged files or directories to .git
-* git checkout – retrieves a previous version of a file to bring it back to the head
-* git status – what’s in the staging area?
-* git diff [first] [second] – compares the differences between commits
+* <b>git init</b> – creates a .git directory, giving the directory Git functionality
+* <b>git add</b> – stages files or directories to be committed to .git
+* <b>git commit</b> – commits all staged files or directories to .git
+* <b>git checkout</b> – retrieves a previous version of a file to bring it back to the head
+* <b>git status</b> – what’s in the staging area?
+* <b>git diff [first] [second]</b> – compares the differences between commits
     * Can use the commit IDs or “HEAD”, “HEAD\~1”, “HEAD\~2”, etc.
 * Git uses a SHA (hashing algorithm) on the data in the file and the current date/time to create a unique ID for each commit
-
+<br/>
 * GitHub – just another computer in the cloud that will store copies of your repo
-* git push – sends a copy of your repository to GitHub
-* git pull – grabs a copy of GitHub’s repository and syncs it with what you have on your local machine
-* git clone – makes a copy of a repo on your machine
+* <b>git push</b> – sends a copy of your repository to GitHub
+* <b>git pull</b> – grabs a copy of GitHub’s repository and syncs it with what you have on your local machine
+* <b>git clone</b> – makes a copy of a repo on your machine
 * ALWAYS make your GitHub repository first and clone it down to your machine – this will make your life so much easier
