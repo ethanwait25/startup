@@ -11,7 +11,7 @@ This document will be used to keep notes relating to the content and assignments
 * git checkout – retrieves a previous version of a file to bring it back to the head
 * git status – what’s in the staging area?
 * git diff [first] [second] – compares the differences between commits
-    * Can use the commit IDs or “HEAD”, “HEAD~1”, “HEAD~2”, etc.
+    * Can use the commit IDs or “HEAD”, “HEAD\~1”, “HEAD\~2”, etc.
 * Git uses a SHA (hashing algorithm) on the data in the file and the current date/time to create a unique ID for each commit
 
 * GitHub – just another computer in the cloud that will store copies of your repo
