@@ -14,6 +14,7 @@ This document will be used to keep notes relating to the content and assignments
     * Can use the commit IDs or “HEAD”, “HEAD\~1”, “HEAD\~2”, etc.
 * Git uses a SHA (hashing algorithm) on the data in the file and the current date/time to create a unique ID for each commit
 <br>
+
 * GitHub – just another computer in the cloud that will store copies of your repo
 * <b>git push</b> – sends a copy of your repository to GitHub
 * <b>git pull</b> – grabs a copy of GitHub’s repository and syncs it with what you have on your local machine
