@@ -17,7 +17,11 @@ AI Warriors is a multiplayer pseudo-RPG, all powered by generative AI. Users cre
 ![A battle rages on!](/assets/images/mockUI/battle.png)
 ![Tragedy... The battle has ended in defeat](/assets/images/mockUI/battlewon.png)
 
+<<<<<<< HEAD
 ### Key Features
+=======
+# Key Features
+>>>>>>> 20de273be47843bc8d32a291c1db493faf72c466
 - Secure login over HTTPS
 - Ability to create custom Synth
 - Auto-generated avatar photo using DALL-E
@@ -28,7 +32,11 @@ AI Warriors is a multiplayer pseudo-RPG, all powered by generative AI. Users cre
 - User levels and avatar photos persistently stored
 - Toggleable (and shufflable) soundtrack written by the developer
 
+<<<<<<< HEAD
 ### Technologies
+=======
+# Technologies
+>>>>>>> 20de273be47843bc8d32a291c1db493faf72c466
 This project will utilize the following technologies:
 - **HTML** - Project uses HTML for structure. Five HTML pages: Home, login, playground, battle, about, and help.
 - **CSS** - Application styling that is consistent across pages. Easily readable text (good contrast between background and text). The background will be textured and move somehow. The fight background color will change.
