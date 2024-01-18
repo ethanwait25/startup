@@ -17,6 +17,7 @@ AI Warriors is a multiplayer pseudo-RPG, all powered by generative AI. Users cre
 ![A battle rages on!](/assets/images/mockUI/battle.png)
 ![Tragedy... The battle has ended in defeat](/assets/images/mockUI/battlewon.png)
 
+
 ### Key Features
 - Secure login over HTTPS
 - Ability to create custom Synth
