@@ -29,3 +29,20 @@ My Site's IP: <b>100.25.121.247</b>
     * We rent a virtual machine on a tiny computer stacked together with thousands of other computers in Virginia owned by AWS
 * EC2 – Amazon Elastic Compute Cloud, a cloud-computing service that allows users to rent virtual computers to run applications on
 * Image – an “image” of a hard drive that can be reused
+
+# Caddy
+* Caddy – a web service that listens for incoming HTTP requests, then serves up the requested static files or routes the request to another web service
+    * Gateway / Reverse proxy – ability to route requests
+    * Allows us to expose multiple web services as a single external web service
+* Caddy will:
+    * Handle the create and rotation of web certificates, allowing HTTPS support
+    * Serve up all static HTML, CSS, and JavaScript files
+    * Act as a gateway for subdomain requests
+* Key Caddy files:
+    * Configuration file (~/Caddyfile)
+        * Contains definitions for routing HTTP requests
+        * Determines location of where static HTML files are loaded from
+        * Used to proxy requests into external services
+    * HTML files (~/public_html)
+        * Directory of files that Caddy serves up when requests are made
+        * Caddy uses the path of the request (ex. /index.html) to find a corresponding file in this directory
