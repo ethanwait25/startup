@@ -3,6 +3,7 @@ This document will be used to keep notes relating to the content and assignments
 
 > "Everyone always wants new things. Everybody likes new inventions, new technology. People will never be replaced by machines. In the end, life and business are about human connections. And computers are about trying to murder you in a lake. And to me the choice is easy." - Michael G. Scott
 
+
 # Git and GitHub
 * Git – version control for a directory
 * <b>git init</b> – creates a .git directory, giving the directory Git functionality
@@ -21,6 +22,7 @@ This document will be used to keep notes relating to the content and assignments
 * <b>git clone</b> – makes a copy of a repo on your machine
 * ALWAYS make your GitHub repository first and clone it down to your machine – this will make your life so much easier
 
+
 # EC2
 My Site's IP: <b>100.25.121.247</b>
 
@@ -29,6 +31,7 @@ My Site's IP: <b>100.25.121.247</b>
     * We rent a virtual machine on a tiny computer stacked together with thousands of other computers in Virginia owned by AWS
 * EC2 – Amazon Elastic Compute Cloud, a cloud-computing service that allows users to rent virtual computers to run applications on
 * Image – an “image” of a hard drive that can be reused
+
 
 # Caddy
 * Caddy – a web service that listens for incoming HTTP requests, then serves up the requested static files or routes the request to another web service
@@ -92,6 +95,7 @@ My Site's IP: <b>100.25.121.247</b>
     * <b>tracert</b> – trace network route
     * <b>dig</b> – DNS information
     * <b>man</b> – look in the manual
+
 
 # HTML Input
 From the very early days of HTML it contained elements for accepting the input of user data. These elements include the following:
@@ -165,6 +169,7 @@ Most input elements share some common attributes. These include the following.
 | value     | The initial value of the input                                                      |
 | required  | Signifies that a value is required in order to be valid                             |
 
+
 # HTML Media
 * img, audio, video - elements that simply reference an external file
 * svg, canvas - contain the code to render a visual image that can even be animated
@@ -209,5 +214,6 @@ To include a video in your content you use the `video` element and specify the `
 ### Canvas
 * Supports 2D drawing and animation
 * HTML is fairly simple, but actually drawing requires JavaScript
+
 
 # HTML Structure
