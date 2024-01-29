@@ -154,6 +154,7 @@ In order to create an input you specify the desired `type` attribute along with 
 
 ```html
 <label for="checkbox1">Check me</label> <input type="checkbox" name="varCheckbox" value="checkbox1" checked />
+```
 
 Most input elements share some common attributes. These include the following.
 
@@ -163,6 +164,5 @@ Most input elements share some common attributes. These include the following.
 | disabled  | Disables the ability for the user to interact with the input                        |
 | value     | The initial value of the input                                                      |
 | required  | Signifies that a value is required in order to be valid                             |
-```
 
 # HTML Media
