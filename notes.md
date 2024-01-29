@@ -62,35 +62,35 @@ My Site's IP: <b>100.25.121.247</b>
     * CTRL-Z – background command
     * CTRL-R – recall command
 * Terminal commands to be familiar with:
-    * echo – output the parameters of the command
-    * cd – change directory
-    * mkdir – make directory
-    * rmdir – remove directory
-    * rm – remove files
+    * <b>echo</b> – output the parameters of the command
+    * <b>cd</b> – change directory
+    * <b>mkdir</b> – make directory
+    * <b>rmdir</b> – remove directory
+    * <b>rm</b> – remove files
         * -r: recursive; delete files in deleted directories
         * -f: force; I know what I’m doing
-    * mv – move files
-    * s – list files
+    * <b>mv</b> – move files
+    * <b>ls</b> – list files
         * -l: long format; permissions, etc.
         * -a: archived; show everything
-    * curl – command line client URL browser
+    * <b>curl</b> – command line client URL browser
         * -s: silent; show a shorter version of curl output with just the essentials
-    * grep – regular expression search
-    * find – find files
-    * top – view running processes
-    * df – view disk statistics
-    * cat – output file to console
-    * less – interactive file output
-    * wc – count words
-    * ps – view processes
-    * kill – kill a process
-    * sudo – execute as admin
-    * ssh – remove shell
-    * scp – securely copy files to a remote computer
-    * history – show history of commands
-    * ping – test connection
-    * tracert – trace network route
-    * dig – DNS information
-    * man – look in the manual
+    * <b>grep</b> – regular expression search
+    * <b>find</b> – find files
+    * <b>top</b> – view running processes
+    * <b>df</b> – view disk statistics
+    * <b>cat</b> – output file to console
+    * <b>less</b> – interactive file output
+    * <b>wc</b> – count words
+    * <b>ps</b> – view processes
+    * <b>kill</b> – kill a process
+    * <b>sudo</b> – execute as admin
+    * <b>ssh</b> – remove shell
+    * <b>scp</b> – securely copy files to a remote computer
+    * <b>history</b> – show history of commands
+    * <b>ping</b> – test connection
+    * <b>tracert</b> – trace network route
+    * <b>dig</b> – DNS information
+    * <b>man</b> – look in the manual
 
 # HTML
