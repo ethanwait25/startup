@@ -46,3 +46,51 @@ My Site's IP: <b>100.25.121.247</b>
     * HTML files (~/public_html)
         * Directory of files that Caddy serves up when requests are made
         * Caddy uses the path of the request (ex. /index.html) to find a corresponding file in this directory
+
+# The Console
+* Very strong in the DNA of programming to use the console
+* Terminal allows us to:
+    * Navigate your disk
+    * Run console applications
+    * Save time – keeps hands on the keyboard
+* POSIX Compliance – the terminal supports a standard set of console commands
+* Pipe and redirect:
+    * \> – redirects into a file; can redirect stdout, stderr, etc.
+    * | – pipes output from one command into the input of another one
+* Control keys:
+    * CTRL-C – cancel command
+    * CTRL-Z – background command
+    * CTRL-R – recall command
+* Terminal commands to be familiar with:
+    * echo – output the parameters of the command
+    * cd – change directory
+    * mkdir – make directory
+    * rmdir – remove directory
+    * rm – remove files
+        * -r: recursive; delete files in deleted directories
+        * -f: force; I know what I’m doing
+    * mv – move files
+    * s – list files
+        * -l: long format; permissions, etc.
+        * -a: archived; show everything
+    * curl – command line client URL browser
+        * -s: silent; show a shorter version of curl output with just the essentials
+    * grep – regular expression search
+    * find – find files
+    * top – view running processes
+    * df – view disk statistics
+    * cat – output file to console
+    * less – interactive file output
+    * wc – count words
+    * ps – view processes
+    * kill – kill a process
+    * sudo – execute as admin
+    * ssh – remove shell
+    * scp – securely copy files to a remote computer
+    * history – show history of commands
+    * ping – test connection
+    * tracert – trace network route
+    * dig – DNS information
+    * man – look in the manual
+
+# HTML
