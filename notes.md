@@ -131,7 +131,7 @@ Pressing the submit button sends the following data to the web server. The brows
 ta-id=Some+text
 ```
 
-## Input Element
+### Input Element
 
 The input element represents many different input types. You set the type of input with the `type` attribute. There are several different types to choose from. This includes different flavors of textual, numeric, date, and color inputs.
 
