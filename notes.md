@@ -219,8 +219,6 @@ To include a video in your content you use the `video` element and specify the `
 # HTML Structure
 * Two major purposes of HTML - structure and content
 * Most common structural elements in HTML: body, header, footer, main, section, aside, p, table, ol/ul, div, and span
-<br>
-
 * body - top level content, contains three children:
     * header
     * main
