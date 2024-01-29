@@ -166,3 +166,48 @@ Most input elements share some common attributes. These include the following.
 | required  | Signifies that a value is required in order to be valid                             |
 
 # HTML Media
+* img, audio, video - elements that simply reference an external file
+* svg, canvas - contain the code to render a visual image that can even be animated
+* Media tags that reference external media can use:
+    * Full path - protocol, domain name, and path to the file
+    * Relative path - references a file that is served from the same location as the HTML page rendering the element
+
+### Image
+
+To include an image in your content you use the `img` element and specify the `src` attribute with the URL to the source image.
+In order to support accessibility, you should also include an `alt` attribute that describes the image. A full img element would look like the following.
+
+```html
+<img alt="mountain landscape" src="https://images.pexels.com/photos/164170/pexels-photo-164170.jpeg" />
+```
+
+### Audio
+
+To include an audio file in your content you use the `audio` element and specify the `src` attribute with the URL to the source audio file. You can include the `controls` attribute if you want the user to be able to control the audio playback. If you do not display the controls then there is no visual representation of the audio in the rendered page. The `autoplay` attribute starts the audio playing as soon as the audio file is loaded, and the `loop` attribute keeps it playing over and over.
+
+* Automatically playing audio is strongly discouraged unless you provide a way for the user to opt-in to that behavior.
+
+```html
+<audio controls src="testAudio.mp3"></audio>
+```
+
+### Video
+
+To include a video in your content you use the `video` element and specify the `src` attribute with the URL to the source video. Like the audio element you can include the `controls` or `autoplay` attributes.
+
+* You may need to include the `crossorigin="anonymous"` attribute if you are requesting files from a different domain than the one serving your content.
+
+```html
+<video controls width="300" crossorigin="anonymous">
+  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
+</video>
+```
+
+### SVG - Scalable Vector Graphics
+* Renders graphics inline in our HTML
+
+### Canvas
+* Supports 2D drawing and animation
+* HTML is fairly simple, but actually drawing requires JavaScript
+
+# HTML Structure
