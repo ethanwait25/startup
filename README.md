@@ -31,7 +31,7 @@ AI Warriors is a multiplayer pseudo-RPG, all powered by generative AI. Users cre
 
 ### Technologies
 This project will utilize the following technologies:
-- **HTML** - Project uses HTML for structure. Five HTML pages: Home, login, playground, battle, about, and help.
+- **HTML** - Project uses HTML for structure. Six HTML pages: Home, login, playground, battle, about, and help.
 - **CSS** - Application styling that is consistent across pages. Easily readable text (good contrast between background and text). The background will be textured and move somehow. The fight background color will change.
 - **JavaScript** - Provides login, playground user display, animations in battle, backend endpoint calls.
 - **Service** - Backend service with endpoints for login, avatar photo generation, and battle dialogue generation. Endpoints will also be used to retrieve, update, and store player level.
