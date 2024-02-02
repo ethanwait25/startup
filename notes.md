@@ -238,4 +238,189 @@ To include a video in your content you use the `video` element and specify the `
         * ex. b (bold) element in a div
 
 
+# Cascading Style Sheets (CSS)
+* Converts the structure and content of HTML into a vibrant, responsive experience
+* Animate the page, deploy custom fonts, respond to user actions, and dynamically alter the layout of the page
+
+![CSS Diagram](https://raw.githubusercontent.com/webprogramming260/.github/main/profile/css/introduction/cssDefinitions.jpg)
+
+* Three ways to associate CSS with HTML:
+1. `style` attribute of an HTML element
+
+```
+<p style="color:green">CSS</p>
+```
+
+2. `style` element in the `head` element of the document
+
+```
+<head>
+  <style>
+    p {
+      color: green;
+    }
+  </style>
+</head>
+```
+
+3. `link` element in the `head` to reference an external file containing CSS rules
+
+```
+<link rel="stylesheet" href="styles.css" />
+```
+
+* Rules cascade down - and any declaration property at a lower level will override the higher declaration
+* Box levels: Content -> Padding -> Border -> Margin
+    * Content - text, image
+    * Padding - inherits background color, etc.
+    * Border - color, thickness, line style, etc.
+    * Margin - external to the styling of the box; represents only whitespace
+
+# CSS Selectors
+* How to select the elements that a CSS rule applies to?
+* `body` - make the rule apply to all the children of the body (the whole document)
+* Element name selectors (ex. `h1`)
+* Combinators:
+    * descendant (ex. `section h2`) - ex. all `h2` element that descend from `section` elements
+    * child (ex. `section > p`) - ex. any p that is a direct child of a section
+    * general sibling (ex. `p ~ div`) - ex. any p that has a div sibling
+    * adjacent sibling (ex. `p + div`) - any p that has an adjacent div sibling
+* Class - select any element that has the given class applied to it (using `class=""` inline with element)
+    * Supply the class name prefixed with a periodex. (ex. `introduction`)
+    * Can also combine element name and class selectors (ex. `p.thing`)
+* ID - select elements with given ID
+    * IDs are unique within an HTML document
+    * Referenced with hash symbol (ex. `#physics`)
+* Attribute - match any elements that have a given attribute
+    * ex. `a[href]`, `p[class='summary']`, etc.
+* Pseudo-selectors - select based on positional relationships, mouse interactions, hyperlink visitation states, attributes, etc.
+    * ex. `h1:hover` - will render described rules if the mouse hovers over the text
+
+# CSS Declarations
+* There are legions(!!) of possible properties defined for modifying the style of an HTML document
+* A few more commonly used ones:
+
+| Property           | Value                              | Example             | Discussion                                                                     |
+| ------------------ | ---------------------------------- | ------------------- | ------------------------------------------------------------------------------ |
+| background-color   | color                              | `red`               | Fill the background color                                                      |
+| border             | color width style                  | `#fad solid medium` | Sets the border using shorthand where any or all of the values may be provided |
+| border-radius      | unit                               | `50%`               | The size of the border radius                                                  |
+| box-shadow         | x-offset y-offset blu-radius color | `2px 2px 2px gray`  | Creates a shadow                                                               |
+| columns            | number                             | `3`                 | Number of textual columns                                                      |
+| column-rule        | color width style                  | `solid thin black`  | Sets the border used between columns using border shorthand                    |
+| color              | color                              | `rgb(128, 0, 0)`    | Sets the text color                                                            |
+| cursor             | type                               | `grab`              | Sets the cursor to display when hovering over the element                      |
+| display            | type                               | `none`              | Defines how to display the element and its children                            |
+| filter             | filter-function                    | `grayscale(30%)`    | Applies a visual filter                                                        |
+| float              | direction                          | `right`             | Places the element to the left or right in the flow                            |
+| flex               |                                    |                     | Flex layout. Used for responsive design                                        |
+| font               | family size style                  | `Arial 1.2em bold`  | Defines the text font using shorthand                                          |
+| grid               |                                    |                     | Grid layout. Used for responsive design                                        |
+| height             | unit                               | `.25em`             | Sets the height of the box                                                     |
+| margin             | unit                               | `5px 5px 0 0`       | Sets the margin spacing                                                        |
+| max-[width/height] | unit                               | `20%`               | Restricts the width or height to no more than the unit                         |
+| min-[width/height] | unit                               | `10vh`              | Restricts the width or height to no less than the unit                         |
+| opacity            | number                             | `.9`                | Sets how opaque the element is                                                 |
+| overflow           | [visible/hidden/scroll/auto]       | `scroll`            | Defines what happens when the content does not fix in its box                  |
+| position           | [static/relative/absolute/sticky]  | `absolute`          | Defines how the element is positioned in the document                          |
+| padding            | unit                               | `1em 2em`           | Sets the padding spacing                                                       |
+| left               | unit                               | `10rem`             | The horizontal value of a positioned element                                   |
+| text-align         | [start/end/center/justify]         | `end`               | Defines how the text is aligned in the element                                 |
+| top                | unit                               | `50px`              | The vertical value of a positioned element                                     |
+| transform          | transform-function                 | `rotate(0.5turn)`   | Applies a transformation to the element                                        |
+| width              | unit                               | `25vmin`            | Sets the width of the box                                                      |
+| z-index            | number                             | `100`               | Controls the positioning of the element on the z axis                          |
+
+### Units
+
+| Unit | Description                                                      |
+| ---- | ---------------------------------------------------------------- |
+| px   | The number of pixels                                             |
+| pt   | The number of points (1/72 of an inch)                           |
+| in   | The number of inches                                             |
+| cm   | The number of centimeters                                        |
+| %    | A percentage of the parent element                               |
+| em   | A multiplier of the width of the letter `m` in the parent's font |
+| rem  | A multiplier of the width of the letter `m` in the root's font   |
+| ex   | A multiplier of the height of the element's font                 |
+| vw   | A percentage of the viewport's width                             |
+| vh   | A percentage of the viewport's height                            |
+| vmin | A percentage of the viewport's smaller dimension                 |
+| vmax | A percentage of the viewport's larger dimension                  |
+
+### Colors
+* Use keywords (`red`), RBG hexes (`#00FFAA22`), RGB functions (`rgb(128, 255, 128, 0.5)`), or HSL (hue, saturation, light) (`hsl(180, 30%, 90%, 0.5)`)
+
+# Fonts
+* Font Types:
+    * San Serif – only major strokes
+    * Serif – minor strokes off the major strokes
+    * Monospace – all letters have the same size
+    * Handwriting – cursive strokes
+1. Create a font face, reference that in our code:
+
+```
+@font-face {
+    font-family: “[a font]”
+    src: url(‘[where you’re storing your font]’)
+}
+
+@p {
+    font-family: [variable name from above]
+}
+```
+2. Reference CSS someone else has written using import command
+
+```
+@import url(‘[import url from Google Fonts, for example]’)
+
+@p {
+    font-family: [variable name from above]
+}
+```
+
+* Usually just want to choose two fonts at the most – one for headings, one for body text
+* Unicode and UTF-8
+    * ASCII’s 128-bit representation eventually got too small
+    * Unicode came out to allow us to render over one million different characters
+    * UTF-8 – a great encoding for Unicode
+* Defining character set UTF-8 – lets the browser know that you’ll be using that set
+
+```
+<head>
+    <meta charset=”UTF-8” />
+</head>
+```
+
+* Once we define our character set, we can paste the characters straight into the code or use Unicode values which will be automatically rendered
+
+# Animations
+* Defining an animation rule:
+    * `animation-name: [give it a name]`
+    * `animation-duration: [number]s`
+    * <b>OR (better):</b> `animation: demo 3s;` (all in one line)
+        * add `infinite` – runs indefinitely
+        * add `alternate` – runs forwards and backwards
+* Creating the animation using the keyframes metatag
+
+```
+@keyframes demo {
+    from {
+        font-size: 0vh;
+    }
+    95% {
+        font-size: 21vh;
+    }
+    to {
+        font-size: 18vh;
+    }
+}
+```
+
+* Keyframes – how it works
+    * We don’t want to over-restrict it with lots of keyframes – we just give it the “times” we care about
+    * `from` – how we want it rendered at the beginning of the animation
+    * `#%` – tells it to render it a certain way after #% of the animation-duration time
+    * `to` – how we want it rendered at the end of the animation
+
 # Next Section
