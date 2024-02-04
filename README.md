@@ -38,3 +38,15 @@ This project will utilize the following technologies:
 - **Database** - Users, avatar photos, player level, etc. stored in the database. Register and login users, with credentials securely stored in the database. Users cannot play unless authenticated.
 - **WebSocket** - Used to join the next ready player to an open Quick Fight. Also utilized to send battle requests to online users and to accept/decline them. May also possibly include a list of recent battle results on the playground page which updates in real-time.
 - **React** - Application ported to use the React web framework.
+
+## HTML Deliverable
+For this deliverable, I built the structure of my application using HTML.
+
+* <b>HTML pages</b> - Five HTML pages that provide structure for a home page, a login and register page, a battle page, a challenger catalogue, and an about page.
+* <b>Links</b> - The home, playground, about, and login pages have links to each of the five pages. The fight page has a link back to the homepage through the "Forfeit" option. On the playground page, clicking on any challenger will initiate a battle through a link to the fight page. Logging in or registering on the login page will take the user back to the home page.
+* <b>Text</b> - Each page contains placeholder and informational text, much of which will remain in the final product.
+* <b>Images</b> - The home, playground, and about pages contain a placeholder user avatar image which will eventually appear in the top left corner of the final product. The fight page contains placeholder user and challenger avatar images. The playground page contains a table of placeholder challenger avatar images.
+* <b>Service call placeholders</b> - The login page contains an input box for new users to write their character prompts. Eventually, this data will be used to call the DALLE API to generate the user avatar. The fight page also contains example battle dialogue which will be rendered after a call to the ChatGPT API.
+* <b>Login placeholder</b> - Login functionality is found on the login page. Once logged in, the user's name and other data will be shown at the top of the home, playground, and about pages as shown.
+* <b>Database data placeholder</b> - All users' character names, current levels, and avatar images will all be stored in the database. A user's own data will be rendered on the home, fight, playground, and login pages as shown. Challenger data (also stored in the database) is shown on the playground and fight pages.
+* <b>WebSocket data placeholder</b> - The three phases of battle dialogue represented on the fight page will be pushed out to both players in real-time. The playground page will also show real-time data of currently-online players, and will update as users enter or leave the playground page.
