@@ -7,25 +7,44 @@
     <link rel="icon" href="favicon.ico" />
   </head>
   <body>
-    <header>
-      <h1>AI Warriors</h1>
-
-      <nav>
-        <menu>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="battle.html">Fight</a></li>
-          <li><a href="playground.html">Playground</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="login.html">Login</a></li>
-        </menu>
-      </nav>
-
-      <hr />
-    </header>
 
     <main>
-      <h2>Battle</h2>
-      <!-- Page content goes here -->
+      <h1>Battle Start!</h1>
+
+      <div>
+        <table>
+          <tr>
+            <td>
+              <div class="userAvatarBattle">
+                <img alt="User Avatar" src="https://fakeimg.pl/300x300?text=User" />
+              </div>
+              <div class="userStats">
+                <p class="userName">User Avatar Name</p>
+                <p class="userByte">32 Byte</p>
+              </div>
+            </td>
+            <td>
+              <div class="vs-center">
+                <h1>VS.</h1>
+              </div>
+            </td>
+            <td>
+              <div class="chalAvatar">
+                <img alt="Challenger!" src="https://fakeimg.pl/300x300?text=Challenger" />
+              </div>
+              <div class="chalStats">
+                <p class="chalName">Challenger Avatar Name</p>
+                <p class="chalByte">29 Byte</p>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <button class="forfeit" onclick="window.location.href='index.html';">
+        Return (Forfeit)
+      </button>
+
     </main>
 
     <footer>
