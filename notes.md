@@ -476,7 +476,7 @@ To include a video in your content you use the `video` element and specify the `
 
 <img alt="display" src="https://raw.githubusercontent.com/webprogramming260/.github/main/profile/css/responsive/cssDisplay.jpg">
 
-# Grid Display
+# Grid
 * Grid – display layout useful for when we want to display a group of child elements in a responsive grid
     * Place display property on the container element – all the children of that element will be displayed in a grid flow
     * `grid-template-columns` – specifies the layout of the grid columns:
@@ -493,7 +493,7 @@ To include a video in your content you use the `video` element and specify the `
 }
 ```
 
-# Flexbox Display
+# Flexbox
 * Flexbox – useful for when we want to partition our application into different areas that responsively move around as the window resizes or the orientation changes
     * `flex-direction` – column or row oriented? (will add elements as the opposite)
     * `flex` – [fractional unit of growth] [starting # pixels]
