@@ -423,4 +423,116 @@ To include a video in your content you use the `video` element and specify the `
     * `#%` – tells it to render it a certain way after #% of the animation-duration time
     * `to` – how we want it rendered at the end of the animation
 
+# Responsive Design
+* Cross-platform coding on the native devices is horrible – you have to write specific wrappers for every type of device infrastructure, etc.
+    * But web programming allows us to write code that can be rendered on any device and dynamically and responsively change
+* Making a dynamic view that can change with size of the device (don’t auto-scale it):
+1) `meta` element with “viewport” – tells the browser to not scale the page
+
+```
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+```
+
+2) `float` CSS attribute (ex. “right” will keep it always on the right of its parent)
+3) Media Queries – detects the size and orientation of the device and applies rules
+
+```
+@media (orientation: portrait) {
+    div {
+        transform: rotate(270deg);
+    }
+}
+```
+
+4) `display` property – flex, block, inline, grid, etc.
+
+| Value  | Meaning                                                                                                                      |
+| ------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| none   | Don't display this element. The element still exists, but the browser will not render it.                                    |
+| block  | Display this element with a width that fills its parent element. A `p` or `div` element has block display by default.        |
+| inline | Display this element with a width that is only as big as its content. A `b` or `span` element has inline display by default. |
+| flex   | Display this element's children in a flexible orientation.                                                                   |
+| grid   | Display this element's children in a grid orientation.                                                                       |
+
+```
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+```
+
+<img alt="display" src="https://raw.githubusercontent.com/webprogramming260/.github/main/profile/css/responsive/cssDisplay.jpg">
+
+# Grid Display
+* Grid – display layout useful for when we want to display a group of child elements in a responsive grid
+    * Place display property on the container element – all the children of that element will be displayed in a grid flow
+    * `grid-template-columns` – specifies the layout of the grid columns:
+        * Repeatedly define each column to auto-fill the parent’s width with children that are reseized to a minimum of # units and maximum of # units
+    * `grid-auto-rows` – fix the height of the rows
+    * `grid-gap` – at least how large will be the gap between each item?
+
+```
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-auto-rows: 300px;
+    grid-gap: 1em;
+}
+```
+
+# Flexbox Display
+* Flexbox – useful for when we want to partition our application into different areas that responsively move around as the window resizes or the orientation changes
+    * `flex-direction` – column or row oriented? (will add elements as the opposite)
+    * `flex` – [fractional unit of growth] [starting # pixels]
+    * Fractional unit – what proportion of the canvas will this take up?
+
+```
+header {
+    flex: 0 80px;
+}
+
+footer {
+    flex: 0 30px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+}
+```
+
+* Can combine flex and media queries:
+
+```
+@media (orientation: portrait) {
+    main {
+        flex-direction: column;
+    }
+}
+
+@media (max-height: 700px) {
+    header {
+        display: none;
+    }
+
+    footer {
+        display: none;
+    }
+}
+```
+
 # Next Section
