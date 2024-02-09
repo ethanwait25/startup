@@ -535,4 +535,65 @@ main {
 }
 ```
 
+# CSS Frameworks
+* Frameworks - provide functions and components that commonly appear in web applications - shared open-source packages of code
+* Decrease web app development time and create common user experiences for the web
+
+### Tailwind
+* Uses smaller definitions that are applied specifically to individual HTML elements
+* Moves much of the CSS representation out of the CSS file and into the HTML
+
+```
+<div class="pt-6 md:p-8 text-center md:text-left space-y-4">
+  <img class="w-24 h-24 md:w-48 md:h-auto md:rounded-none rounded-full mx-auto" src="profile.png" />
+  <p class="text-lg font-medium">“Tailwind CSS”</p>
+</div>
+```
+
+### Bootstrap
+* Most popular and successful CSS framework
+    * This is also its drawback - it defines the de facto look and feel of websites; hard to grab attention of new users because so "vanilla"
+* Getting Bootstrap - add `link` element to the HTML `head`
+    * If you want to use Bootstrap's components that use JavaScript (carousels, buttons, etc.), you need to add the Bootstrap JS module at <b>the end of your HTML body element</b>
+
+```
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+  </head>
+```
+
+```
+<body>
+  ...
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"
+  ></script>
+</body>
+```
+
+* Using Node Pacakage Manager (NPM) to download Bootstrap and include it in source code:
+```
+npm install bootstrap@5.2.3
+```
+
+* Using Bootstrap - add style data in the class field
+
+Example:
+```
+// Bootstrap styled button
+<button type="button" class="btn btn-primary">Bootstrap</button>
+
+// Default browser styled button
+<button type="button">Plain</button>
+```
+
 # Next Section
