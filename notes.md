@@ -692,6 +692,9 @@ function sayHello() {
 * Essentially the same makeup as other common programming languages
 * Object - a collection of properties represented by name-value pairs (of any time)
     * `{a:3, b:'fish'}`
+* Variables are declared using the `var`, `let` or `const` names
+    * `var` is globally scoped or function scoped
+    * `let` and `const` are both block scoped
 
 ### A Weakly Typed Language
 * Weakly typed - a varibale always has a type, but the variable can change type when it is assigned a new value
