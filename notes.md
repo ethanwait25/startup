@@ -596,4 +596,339 @@ Example:
 <button type="button">Plain</button>
 ```
 
+# JavaScript
+* JavaScript (officially ECMAScript) - a weakly-typed languaged based upon concepts found in C, Java, Scheme
+* By far the most used programming language in the world - runs on every web browser, web server language, etc.
+* Executed using an interpreter at runtime instead of compiling it into a machine specific binary at build time
+    * Very portable, but allows for many errors, such as using an undefined variable
+
+### Getting Started with JavaScript
+* `console.log(input: String)` - write a string to the debugger console
+* Can also write our own functions:
+
+```
+function join(a, b) {
+  return a + ' ' + b;
+}
+
+console.log(join('Hello', 'world'));
+// OUTPUT: Hello world
+```
+
+* Can comment Javascript with either line or block comments:
+    * Line: `// Like so`
+    * Block: `/* Like so */`
+* End statements with a semicolon
+
+# JavaScript Console
+* The console object provides interaction with the JavaScript runtime's debugger console
+    * Provides functionality for outputting the value of text and objects, running timers, and counting iterations
+* This is not our operating system's console
+
+### Log
+* The basic usage of the console object is to output a log message:
+    * `console.log('hello')`
+* Can create formatted messages
+    * `console.log('hello %s', 'world')`
+* Can style log output with CSS declarations
+    * `console.log('%c JavaScript Demo', 'font-size:1.5em; color:green;')`
+
+### Timers
+* Useful to see for how long a piece of code is rusnning
+* Wrap the code with `time` and `timeEnd` calls
+
+```
+console.time('demo time');
+// ... some code that takes a long time.
+console.timeEnd('demo time');
+// OUTPUT: demo time: 9762.74 ms
+```
+
+### Count
+* To see how many times a block of code is called:
+
+```
+console.count('a');
+// OUTPUT: a: 1
+console.count('a');
+// OUTPUT: a: 2
+console.count('b');
+// OUTPUT: b: 1
+```
+
+# Adding JavaScript to HTML
+1) Include the JavaScritp directly in the HTML within the content of a `<script>` element
+2) Use the `src` attribute of the script element to reference an external JavaScript file
+
+<b>index.js</b>
+
+```
+function sayHello() {
+  console.log('hello');
+}
+```
+
+<b>index.html</b>
+
+```
+<head>
+  <script src="javascript.js"></script>
+</head>
+<body>
+  <button onclick="sayHello()">Say Hello</button>
+  <button onclick="sayGoodbye()">Say Goodbye</button>
+  <script>
+    function sayGoodbye() {
+      alert('Goodbye');
+    }
+  </script>
+</body>
+```
+
+* Special attributes like `onclick` create event listeners for different DOM events that call the code contained in the attribute's value
+    * Can be a simple call to a function or any JavaScript code
+
+# JavaScript Type and Construct
+* Essentially the same makeup as other common programming languages
+* Object - a collection of properties represented by name-value pairs (of any time)
+    * `{a:3, b:'fish'}`
+
+### A Weakly Typed Language
+* Weakly typed - a varibale always has a type, but the variable can change type when it is assigned a new value
+    * Types can be automatically converted based upon the context that they are used in
+    * Can lead to unexpected results for programmers used to strongly typed languages
+
+<b>Example</b>
+
+```
+2 + '3';
+// OUTPUT: '23'
+2 * '3';
+// OUTPUT: 6
+[2] + [3];
+// OUTPUT: '23'
+true + null;
+// OUTPUT: 1
+true + undefined;
+// OUTPUT: NaN
+```
+
+<b>Unexpected Results with Equality Operator</b>
+
+```
+1 == '1';
+// OUTPUT: true
+null == undefined;
+// OUTPUT: true
+'' == false;
+// OUTPUT: true
+```
+
+* Because of this, JavScript introduced the strict equality (===) and inequality (!==) operators
+    * These skip the type conversion when computing equality
+    * Should almost always use this in our code
+
+```
+1 === '1';
+// OUTPUT: false
+null === undefined;
+// OUTPUT: false
+'' === false;
+// OUTPUT: false
+```
+
+### for
+
+```
+for (let i = 0; i < 2; i++) {
+  console.log(i);
+}
+// OUTPUT: 0 1
+```
+
+### do while
+
+```
+let i = 0;
+do {
+  console.log(i);
+  i++;
+} while (i < 2);
+// OUTPUT: 0 1
+```
+
+### while
+
+```
+let i = 0;
+while (i < 2) {
+  console.log(i);
+  i++;
+}
+// OUTPUT: 0 1
+```
+
+### for in
+* Iterates over an object's <b>property names</b>
+    * For arrays, the object's name is the <b>array index</b>
+
+```
+const obj = { a: 1, b: 'fish' };
+for (const name in obj) {
+  console.log(name);
+}
+// OUTPUT: a
+// OUTPUT: b
+```
+
+```
+const arr = ['a', 'b'];
+for (const name in arr) {
+  console.log(name);
+}
+// OUTPUT: 0
+// OUTPUT: 1
+```
+
+### for of
+* Iterates over an iterable's property values
+
+```
+const arr = ['a', 'b'];
+for (const val of arr) {
+  console.log(val);
+}
+// OUTPUT: 'a'
+// OUTPUT: 'b'
+```
+
+### break and continue
+
+```
+let i = 0;
+while (true) {
+  console.log(i);
+  if (i === 0) {
+    i++;
+    continue;
+  } else {
+    break;
+  }
+}
+// OUTPUT: 0 1
+```
+
+# JavaScript String
+* Defined in the regular way
+* Can also create a string literal replacement specifier with a dollar sign followed by a curly brace pair
+    * Anything inside the curly braces is evaluated as JavaScript
+
+```
+'quoted text'; // " also works
+
+const l = 'literal';
+console.log(`string ${l + (1 + 1)} text`);
+// OUTPUT: string literal2 text
+```
+
+* JavaScript supports Unicode
+
+### String Functions
+
+| Function      | Meaning                                                      |
+| ------------- | ------------------------------------------------------------ |
+| length        | The number of characters in the string                       |
+| indexOf()     | The starting index of a given substring                      |
+| split()       | Split the string into an array on the given delimiter string |
+| startsWith()  | True if the string has a given prefix                        |
+| endsWith()    | True if the string has a given suffix                        |
+| toLowerCase() | Converts all characters to lowercase                         |
+
+```
+const s = 'Example:조선글';
+
+console.log(s.length);
+// OUTPUT: 11
+console.log(s.indexOf('조선글'));
+// OUTPUT: 8
+console.log(s.split(':'));
+// OUTPUT: ['Example', '조선글']
+console.log(s.startsWith('Ex'));
+// OUTPUT: true
+console.log(s.endsWith('조선글'));
+// OUTPUT: true
+console.log(s.toLowerCase());
+// OUTPUT: example:조선글
+```
+
+# JavaScript Functions
+* JavaScript functions are first class objects - assigned a name, passed as a parameter, returned as a result, and referenced from an object or array just like any other variable
+* Begins with `function` keyword followed by a name, zero or more parameters, and a body with zero or more return statements
+* Can set default parameter values
+* If a parameter is not provided, then the value of the parameter is `undefined` when the function executes
+* Functions can be declared inside other functions - inner functions
+
+### Anonymous Functions
+* Anonymous functions - assigned to a variable to be used as a parameter to some other function
+
+```
+function doMath(operation, a, b) {
+  return operation(a, b);
+}
+
+// Anonymous function assigned to a variable
+const add = function (a, b) {
+  return a + b;
+};
+
+console.log(doMath(add, 5, 3));
+// OUTPUT: 8
+```
+
+# JavaScript Arrow Function
+* Replaces need for the `function` keyword with the symbols `=>` placed after the parameter declaration
+    * Helps declutter the code when many parameters are being assigned functions
+* Ex. a function in arrow syntax that takes no parameters and always returns 3:
+
+```
+() => 3;
+```
+
+* These two are equivalent:
+
+```
+const a = [1, 2, 3, 4];
+
+// standard function syntax
+a.sort(function (v1, v2) {
+  return v1 - v2;
+});
+
+// arrow function syntax
+a.sort((v1, v2) => v1 - v2);
+```
+
+* You must use the `return` keyword in the if there is more than a single expression in curly braces
+
+# JavaScript Array
+* Uses zero-based index
+* Created using [] notation (ie `const a = [1, 2, 3]`)
+
+### Interesting Array Functions
+
+| Function | Meaning                                                   | Example                       |
+| -------- | --------------------------------------------------------- | ----------------------------- |
+| push     | Add an item to the end of the array                       | `a.push(4)`                   |
+| pop      | Remove an item from the end of the array                  | `x = a.pop()`                 |
+| slice    | Return a sub-array                                        | `a.slice(1,-1)`               |
+| sort     | Run a function to sort an array in place                  | `a.sort((a,b) => b-a)`        |
+| values   | Creates an iterator for use with a `for of` loop          | `for (i of a.values()) {...}` |
+| find     | Find the first item satisfied by a test function          | `a.find(i => i < 2)`          |
+| forEach  | Run a function on each array item                         | `a.forEach(console.log)`      |
+| reduce   | Run a function to reduce each array item to a single item | `a.reduce((a, c) => a + c)`   |
+| map      | Run a function to map an array to a new array             | `a.map(i => i+i)`             |
+| filter   | Run a function to remove items                            | `a.filter(i => i%2)`          |
+| every    | Run a function to test if all items match                 | `a.every(i => i < 3)`         |
+| some     | Run a function to test if any items match                 | `a.some(i => 1 < 1)`          |
+
 # Next Section
