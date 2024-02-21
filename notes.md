@@ -934,4 +934,197 @@ a.sort((v1, v2) => v1 - v2);
 | every    | Run a function to test if all items match                 | `a.every(i => i < 3)`         |
 | some     | Run a function to test if any items match                 | `a.some(i => 1 < 1)`          |
 
+# JSON
+* JavaScript Object Notation - simple and effective way to store and share data
+* JSON Objects
+    * Contain zero or more key-value pairs
+    * Key is always a string, value is one of the valid JSON data types
+    * Key-value pairs delimited with commas, objects delimited with curly braces
+* Converting to and from JSON / JavaScript Objects:
+    * `JSON.parse`
+    * `JSON.stringify`
+
+```
+const obj = { a: 2, b: 'crockford', c: undefined };
+const json = JSON.stringify(obj);
+const objFromJson = JSON.parse(json);
+```
+
+# Document Object Model (DOM)
+* DOM - object representation of the HTML elements that the browser uses to render the display
+    * Can interact with the DOM to dynamically manipulate the HTML
+* `document` - the global variable that the browser uses to provide access to the DOM - points to the root element of the DOM
+    * Everything in an HTML document has a node in the DOM that is accessed through `document`
+
+```
+function displayElement(el) {
+  console.log(el.tagName);
+  for (const child of el.children) {
+    displayElement(child);
+  }
+}
+
+displayElement(document);
+```
+
+* `querySelector()` and `querySelectorAll()` - can provide a CSS selector to these functions in order to select elements from the document
+    * `querySelector` selects only the first single instance; `querySelectorAll` selects all instances
+* `textContent` - a property of element objects that contains all the element's text
+* `innerHTML` - a property used to access a textual representation of an element's HTML content
+
+```
+const listElements = document.querySelectorAll('p');
+for (const el of listElements) {
+  console.log(el.textContent);
+}
+```
+
+### Modifying the DOM
+* Creating a new element:
+1. Create element on the DOM document
+2. Insert the new element into the DOM tree by appending it to an existing element in the tree
+
+```
+function insertChild(parentSelector, text) {
+  const newChild = document.createElement('div');
+  newChild.textContent = text;
+
+  const parentElement = document.querySelector(parentSelector);
+  parentElement.appendChild(newChild);
+}
+
+insertChild('#courses', 'new course');
+```
+
+* Deleting an element - call the `removeChild` function on the parent element
+
+```
+function deleteElement(elementSelector) {
+  const el = document.querySelector(elementSelector);
+  el.parentElement.removeChild(el);
+}
+
+deleteElement('#courses div');
+```
+
+* Injecting HTML - can inject entire blocks of HTML into an element
+
+```
+const el = document.querySelector('div');
+el.innerHTML = '<div class="injected"><b>Hello</b>!</div>';
+```
+
+### Event Listeners
+* All DOM elements support the ability to attach a function that gets called when an event occurs on the element
+
+| Event Category | Description           |
+| -------------- | --------------------- |
+| Clipboard      | Cut, copied, pasted   |
+| Focus          | An element gets focus |
+| Keyboard       | Keys are pressed      |
+| Mouse          | Click events          |
+| Text selection | When text is selected |
+
+* Adding event listeners:
+1. Written into the JavaScript objects:
+
+```
+const submitDataEl = document.querySelector('#submitData');
+submitDataEl.addEventListener('click', function (event) {
+  console.log(event.type);
+});
+```
+
+2. Written directly into the HTML:
+
+```
+<button onclick='alert("clicked")'>click me</button>
+```
+
+# Local Storage
+* Browser's `localStorage` API - provides the ability to persistently store and retrieve data (i.e. scores, usernames, etc.,) on a user's browser across user sessions and HTML page renderings
+    * Stored data will be available in local storage the next time a user uses the <b>same browser</b> to visit the same website
+    * Can render data when the server is down
+
+| Function             | Meaning                                      |
+| -------------------- | -------------------------------------------- |
+| setItem(name, value) | Sets a named item's value into local storage |
+| getItem(name)        | Gets a named item's value from local storage |
+| removeItem(name)     | Removes a named item from local storage      |
+| clear()              | Clears all items in local storage            |
+
+* Value must be of type string, number, or boolean
+    * If you want to store an object in localStorage, we first have to convert it to a JSON string with `JSON.stringify()` and parse it back with `JSON.parse()` when retrieved
+
+```
+localStorage.setItem('user', user);
+localStorage.setItem('object', JSON.stringify(myObject));
+localStorage.setItem('array', JSON.stringify(myArray));
+```
+
+# Promises
+* `Promise` - an object that allows the main rendering thread to continue while some action is executed in the background
+
+```
+const delay = (msg, wait) => {
+  setTimeout(() => {
+    console.log(msg, wait);
+  }, 1000 * wait);
+};
+
+new Promise((resolve, reject) => {
+  // Code executing in the promise
+  for (let i = 0; i < 3; i++) {
+    delay('In promise', i);
+  }
+});
+
+// Code executing after the promise
+for (let i = 0; i < 3; i++) {
+  delay('After promise', i);
+}
+
+// OUTPUT:
+//   In promise 0
+//   After promise 0
+//   In promise 1
+//   After promise 1
+//   In promise 2
+//   After promise 2
+```
+
+A promise state is always one of the following:
+1. <b>pending</b> - currently running asynchronously
+2. <b>fulfilled</b> - completed successfully
+3. <b>rejected</b> - failed to complete
+
+* We need to be able to set the state to `fulfilled` when things complete correctly, or to `rejected` when an error occurs
+* Promise takes in two functions as parameters - `resolve` and `reject`
+    * Calling `resolve` sets the promise to `fulfilled` state
+    * Calling `reject` sets the promise to `rejected` state
+
+```
+const coinToss = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    if (Math.random() > 0.5) {
+      resolve('success');
+    } else {
+      reject('error');
+    }
+  }, 10000);
+});
+```
+
+* Promise object has `then`, `catch`, and `finally` functions
+    * `then` - called if promise is fulfilled
+    * `catch` - called if promise is rejected
+    * `finally` - always called after all processing is completed
+
+```
+coinToss
+  .then((result) => console.log(`Coin toss result: ${result}`))
+  .catch((err) => console.log(`Error: ${err}`))
+  .finally(() => console.log('Toss completed'));
+```
+
 # Next Section
