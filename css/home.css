@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Russo+One&display=swap');
+
+header {
+    flex: 0 50px;
+    background-color: #545454;
+    color: white;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+header div {
+    padding: 0 0.5em;
+}
+
+div.userHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.logo {
+    width: 300px;
+}
+
+ul.main-menu {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0 auto 0 0;
+}
+
+li.main-menu-item a {
+    text-decoration: none;
+    font-family: "Russo One", sans-serif;
+    color: inherit;
+    padding: 25px;
+    font-size: large;
+}
+
+p {
+    font-family: "Kode Mono", monospace;
+}
