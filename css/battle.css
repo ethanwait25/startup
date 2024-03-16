@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap');
+
 * { /* reset margins and paddings on all elements */
 	margin:0;
 	padding:0;
@@ -12,7 +14,7 @@ body::before {
 		background-color:#14C2CC;
 		background-image: 
 		radial-gradient(circle farthest-side at top right, transparent, #0D64FF), radial-gradient(ellipse farthest-corner at 0% 100%, transparent, #FF00A0);
-		animation:bg-change 10s infinite;
+		animation: bg-change 10s infinite;
 }
 
 @keyframes bg-change {
@@ -22,4 +24,119 @@ body::before {
 	50% {
 		filter:hue-rotate(-60deg);
 	}
+}
+
+main {
+	color: white;
+	font-family: "Kode Mono", monospace;
+}
+
+h1 {
+	text-align: center;
+	padding-top: 2em;
+}
+
+h2 {
+	text-align: center;
+}
+
+.chalStats {
+	text-align: right;
+}
+
+.userAvatarBattle:hover {
+	animation: left-up 2s ease 0s 1 normal forwards;
+	
+}
+
+.userAvatarBattle:hover ~ .userStats {
+	animation: left-up-text 2s ease 0s 1 normal forwards;
+	
+}
+
+.chalAvatar:hover {
+	animation: right-up 2s ease 0s 1 normal forwards;
+	
+}
+
+.chalAvatar:hover ~ .chalStats {
+	animation: right-up-text 2s ease 0s 1 normal forwards;
+	
+}
+
+.vs-center {
+	padding: 3em;
+}
+
+.vs-center h1 {
+	vertical-align: middle;
+	padding: 0;
+}
+
+.vs-center:hover {
+	animation: vs-fade 1s ease 0s 1 normal forwards;
+}
+
+@keyframes left-up {
+	0% {
+		transform: scale(1) translateX(0) translateY(0);
+	}
+
+	100% {
+		transform: scale(0.5) translateX(-800px) translateY(-100px);
+	}
+}
+
+@keyframes left-up-text {
+	15% {
+		transform: scale(1) translateX(0) translateY(0);
+	}
+
+	100% {
+		transform: translateX(-160px) translateY(-275px);
+	}
+}
+
+@keyframes right-up {
+	0% {
+		transform: scale(1) translateX(0) translateY(0);
+	}
+
+	100% {
+		transform: scale(0.5) translateX(800px) translateY(-100px);
+	}
+}
+
+@keyframes right-up-text {
+	15% {
+		transform: scale(1) translateX(0) translateY(0);
+	}
+
+	100% {
+		transform: translateX(160px) translateY(-275px);
+	}
+}
+
+@keyframes vs-fade {
+	10% {
+		opacity: 100%;
+	}
+
+	100% {
+		opacity: 0%;
+	}
+}
+
+.battleHeaders {
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+
+	padding: 3em 7em 3em 7em;
+}
+
+.dialogue {
+	padding: 0 0 2em 0;
 }

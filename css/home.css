@@ -44,10 +44,21 @@ li.main-menu-item a {
     color: inherit;
     padding: 25px;
     font-size: large;
+
+    transition: color 0.5s;
+    transition: font-size 1s;
+}
+
+li.main-menu-item a:hover {
+    color: white;
+    font-size: 40px;
 }
 
 p {
     font-family: "Kode Mono", monospace;
+}
+
+main {
     text-align: center;
 }
 
