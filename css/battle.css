@@ -6,23 +6,32 @@
 }
 
 body::before {
-		content:""; /* required for ::before */
-		position:fixed; /* don't scroll with page */
-		z-index:-100; /* place behind elements on page */
+		content:"";
+		position:fixed;
+		z-index:-100;
 		width:100%;
 		height:100%;
-		background-color:#14C2CC;
+		background-color:#c1b9ae;
 		background-image: 
-		radial-gradient(circle farthest-side at top right, transparent, #0D64FF), radial-gradient(ellipse farthest-corner at 0% 100%, transparent, #FF00A0);
-		animation: bg-change 10s infinite;
+		radial-gradient(circle, rgba(225,170,7,1) 0%, rgba(233,105,7,1) 80%, rgba(225,170,7,1) 100%);
+		animation: bg-change 12s infinite;
 }
 
 @keyframes bg-change {
-	0%, 100% {
-		filter:hue-rotate(40deg);
+	0% {
+		filter:hue-rotate(0deg);
+	}
+	25% {
+		filter:hue-rotate(-20deg);
 	}
 	50% {
-		filter:hue-rotate(-60deg);
+		filter:hue-rotate(0deg);
+	}
+	75% {
+		filter:hue-rotate(20deg);
+	}
+	100% {
+		filter:hue-rotate(0deg);
 	}
 }
 
@@ -34,18 +43,26 @@ main {
 h1 {
 	text-align: center;
 	padding-top: 2em;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.35);
 }
 
 h2 {
 	text-align: center;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.35);
 }
 
 .chalStats {
 	text-align: right;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+img {
+	box-shadow: 12px 12px 20px -12px rgba(0, 0, 0, 0.35)
 }
 
 .userAvatarBattle:hover {
 	animation: left-up 2s ease 0s 1 normal forwards;
+	box-shadow: 12px 12px 20px -12px rgba(0, 0, 0, 0.35)
 	
 }
 
@@ -83,7 +100,7 @@ h2 {
 	}
 
 	100% {
-		transform: scale(0.5) translateX(-800px) translateY(-100px);
+		transform: scale(0.5) translateX(-800px) translateY(-300px);
 	}
 }
 
@@ -93,7 +110,7 @@ h2 {
 	}
 
 	100% {
-		transform: translateX(-160px) translateY(-275px);
+		transform: translateX(-160px) translateY(-375px);
 	}
 }
 
@@ -103,7 +120,7 @@ h2 {
 	}
 
 	100% {
-		transform: scale(0.5) translateX(800px) translateY(-100px);
+		transform: scale(0.5) translateX(800px) translateY(-300px);
 	}
 }
 
@@ -113,7 +130,7 @@ h2 {
 	}
 
 	100% {
-		transform: translateX(160px) translateY(-275px);
+		transform: translateX(160px) translateY(-375px);
 	}
 }
 
@@ -137,6 +154,30 @@ h2 {
 	padding: 3em 7em 3em 7em;
 }
 
+.dialogueBox {
+	width: fit-content;
+	margin: auto;
+}
+
 .dialogue {
 	padding: 0 0 2em 0;
+}
+
+.dialogue:hover {
+	animation: tilt-n-move-shaking 0.25s forwards,
+		text-pulse 0.6s forwards;
+}
+
+@keyframes tilt-n-move-shaking {
+	0% { transform: translate(0, 0) rotate(0deg); }
+	25% { transform: translate(10px, 10px) rotate(10deg); }
+	50% { transform: translate(0, 0) rotate(0eg); }
+	75% { transform: translate(-10px, 10px) rotate(-10deg); }
+	100% { transform: translate(0, 0) rotate(0deg); }
+  }
+
+@keyframes text-pulse {
+	0% { font-size: 1em }
+	75% { font-size: 2em }
+	100% { font-size: 1.6em }
 }
