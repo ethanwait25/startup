@@ -11,24 +11,24 @@
     <header>
       <div class="userHeader">
         <div class="userAvatar">
-          <img alt="placeholder" src="https://fakeimg.pl/150x150?text=Avatar"></img>
+          <img alt="placeholder" src="https://fakeimg.pl/125x125?text=Avatar"></img>
         </div>
         <div class="userStats">
           <p class="userName">User Avatar Name</p>
           <p class="userByte">32 Byte</p>
         </div>
       </div>
-      
-      <h1>AI Warriors</h1>
+
+      <a href="index.html"><img class="logo" src="/assets/images/logo.png"></img></a>
 
       <nav>
-        <menu>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="battle.html">Fight</a></li>
-          <li><a href="playground.html">Playground</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="login.html">Login</a></li>
-        </menu>
+        <ul class="main-menu">
+          <li class="main-menu-item"><a href="index.html">Home</a></li>
+          <li class="main-menu-item"><a href="battle.html">Fight</a></li>
+          <li class="main-menu-item"><a href="playground.html">Playground</a></li>
+          <li class="main-menu-item"><a href="about.html">About</a></li>
+          <li class="main-menu-item"><a href="login.html">Login</a></li>
+        </ul>
       </nav>
 
       <hr />
@@ -39,7 +39,7 @@
 
       <p>Choose a challenger below to put to the test!</p>
       
-      <div class="chals" id="chalsContainer">
+      <!-- <div class="chals" id="chalsContainer">
         <table>
           <tr>
             <td class="chal" id="c1">
@@ -80,6 +80,30 @@
             </td>
           </tr>
         </table>
+      </div> -->
+
+      <div id="chalsContainer">
+
+        <div class="chal" id="c1">
+          <div class="chalAvatar">
+            <a href="battle.html"><img alt="Challenger!" src="https://fakeimg.pl/200x200?text=Challenger" /></a>
+          </div>
+          <div class="chalStats">
+            <p class="chalName">Challenger Name</p>
+            <p class="chalByte">47 Byte</p>
+          </div>
+        </div>
+
+        <div class="chal" id="c2">
+          <div class="chalAvatar">
+            <a href="battle.html"><img alt="Challenger!" src="https://fakeimg.pl/200x200?text=Challenger" /></a>
+          </div>
+          <div class="chalStats">
+            <p class="chalName">Challenger Name</p>
+            <p class="chalByte">31 Byte</p>
+          </div>
+        </div>
+
       </div>
 
     </main>

@@ -181,3 +181,33 @@ img {
 	75% { font-size: 2em }
 	100% { font-size: 1.6em }
 }
+
+.forfeitButton {
+	display: flex;
+	justify-content: center;
+	padding: 0 0 15px 0;
+}
+
+a.forfeit {
+	background: linear-gradient(to right,#f59e42 ,#b14d00);
+	background-color: #f59e42;
+	color: #fff;
+	font-size: 18px;
+	font-weight: 800;
+	font-style: normal;
+	text-decoration: none;
+	padding: 14px 15px;
+	border: 0px solid #000;
+	border-radius: 10px;
+	display: inline-block;
+	box-shadow: 0px 0px 10px 0px #2D2D2D;
+}
+
+a.forfeit:hover {
+	background: linear-gradient(to right,#f6aa66 ,#ba6d51);
+	background-color: #f6aa66;
+}
+
+a.forfeit:active {
+	transform: scale(0.95);
+}

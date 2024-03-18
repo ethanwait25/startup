@@ -4,7 +4,6 @@
 header {
     flex: 0 50px;
     background-color: #545454;
-    color: white;
 
     display: flex;
     flex-direction: row;
@@ -18,6 +17,7 @@ header div {
 }
 
 div.userHeader {
+    color: white;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -28,6 +28,7 @@ div.userHeader {
 }
 
 ul.main-menu {
+    color: #f9b873;
     list-style-type: none;
     display: flex;
     flex-direction: row;
@@ -38,16 +39,36 @@ ul.main-menu {
 
 li.main-menu-item a {
     text-decoration: none;
-    font-family: "Russo One", sans-serif;
+    /* font-family: "Russo One", sans-serif; */
+    font-family: "Kode Mono", monospace;
     color: inherit;
     padding: 25px;
     font-size: large;
+
+    transition: color 0.5s;
+    transition: font-size 0.8s;
+}
+
+li.main-menu-item a:hover {
+    color: white;
+    font-size: 30px;
 }
 
 p {
     font-family: "Kode Mono", monospace;
+    text-align: left;
+}
+
+main {
+    text-align: center;
 }
 
 body {
     background-color: #909090;
+}
+
+h2 {
+    font-family: "Kode Mono", monospace;
+    text-align: center;
+    padding-top: 20px;
 }

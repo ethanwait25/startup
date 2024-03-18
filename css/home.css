@@ -46,12 +46,12 @@ li.main-menu-item a {
     font-size: large;
 
     transition: color 0.5s;
-    transition: font-size 1s;
+    transition: font-size 0.8s;
 }
 
 li.main-menu-item a:hover {
     color: white;
-    font-size: 40px;
+    font-size: 30px;
 }
 
 p {

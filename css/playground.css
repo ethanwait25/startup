@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Russo+One&display=swap');
+
+header {
+    flex: 0 50px;
+    background-color: #545454;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+header div {
+    padding: 0 0.5em;
+}
+
+div.userHeader {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.logo {
+    width: 300px;
+}
+
+ul.main-menu {
+    color: #f9b873;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0 auto 0 0;
+}
+
+li.main-menu-item a {
+    text-decoration: none;
+    /* font-family: "Russo One", sans-serif; */
+    font-family: "Kode Mono", monospace;
+    color: inherit;
+    padding: 25px;
+    font-size: large;
+
+    transition: color 0.5s;
+    transition: font-size 0.8s;
+}
+
+li.main-menu-item a:hover {
+    color: white;
+    font-size: 30px;
+}
+
+p {
+    font-family: "Kode Mono", monospace;
+    text-align: left;
+}
+
+main {
+    text-align: center;
+}
+
+body {
+    background-color: #909090;
+}
+
+h2 {
+    font-family: "Kode Mono", monospace;
+    text-align: center;
+    padding-top: 20px;
+}
+
+#chalsContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.chalAvatar img:hover {
+    width: 100px;
+}
+
+.chal {
+    padding: 30px;
+}
+
+.chalStats p {
+    text-align: center;
+    margin: 10px;
+}
