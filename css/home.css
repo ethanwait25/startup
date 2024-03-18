@@ -8,7 +8,7 @@ header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     vertical-align: middle;
 }
 
@@ -34,7 +34,6 @@ ul.main-menu {
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    margin: 0 auto 0 0;
 }
 
 li.main-menu-item a {
@@ -60,6 +59,8 @@ p {
 
 main {
     text-align: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.35);
 }
 
 body {
