@@ -58,7 +58,7 @@ p {
 }
 
 body {
-    background-color: #909090;
+    background-color: #f9b873;
 }
 
 main {
@@ -70,7 +70,6 @@ main {
 .contentArea {
     width: fit-content;
     block-size: fit-content;
-    background-color: #909090;
     /* background-color: #f9b873; */
     margin: 100px auto 100px auto;
     padding: 0 25px 25px 25px;
