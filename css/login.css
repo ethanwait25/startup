@@ -114,3 +114,40 @@ button:hover {
 button:active {
 	transform: scale(0.95);
 }
+
+.footerContainer {
+    min-height: 27vh;    
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    flex: 1;
+    color: white;
+    background-color: #545454;
+	margin-top: 15px;
+}
+
+footer p {
+    padding-top: 25px;
+    padding-left: 15px;
+	font-family: "Kode Mono", monospace;
+
+	display: block;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-family: "Kode Mono", monospace;
+    padding-left: 15px;
+}
+
+footer a:hover {
+    color: #f9b873;
+}

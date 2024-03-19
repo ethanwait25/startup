@@ -57,18 +57,57 @@ p {
     font-family: "Kode Mono", monospace;
 }
 
+body {
+    background-color: #f9b873;
+}
+
 main {
     text-align: center;
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.35);
 }
 
-body {
+.contentArea {
+    width: fit-content;
+    block-size: fit-content;
     background-color: #909090;
+    /* background-color: #f9b873; */
+    margin: 100px auto 100px auto;
+    padding: 0 25px 25px 25px;
+    border-radius: 15px;
 }
 
 h2 {
     font-family: "Kode Mono", monospace;
     text-align: center;
     padding-top: 20px;
+}
+
+.footerContainer {
+    min-height: 22vh;    
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    background-color: #545454;
+    flex: 1;
+    color: white;
+}
+
+footer p {
+    padding-top: 25px;
+    padding-left: 15px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-family: "Kode Mono", monospace;
+    padding-left: 15px;
+}
+
+footer a:hover {
+    color: #f9b873;
 }
