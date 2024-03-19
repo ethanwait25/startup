@@ -50,3 +50,13 @@ For this deliverable, I built the structure of my application using HTML.
 * <b>Login placeholder</b> - Login functionality is found on the login page. Once logged in, the user's name and other data will be shown at the top of the home, playground, and about pages as shown.
 * <b>Database data placeholder</b> - All users' character names, current levels, and avatar images will all be stored in the database. A user's own data will be rendered on the home, fight, playground, and login pages as shown. Challenger data (also stored in the database) is shown on the playground and fight pages.
 * <b>WebSocket data placeholder</b> - The three phases of battle dialogue represented on the fight page will be pushed out to both players in real-time. The playground page will also show real-time data of currently-online players, and will update as users enter or leave the playground page.
+
+## CSS Deliverable
+For this deliverable, I used CSS to style the structure I built in the previous section.
+
+* <b>Header, footer, and main content body</b> - Styled the headers and footers on each of the pages. The main content of each page's body has also been styled.
+* <b>Navigation elements</b> - Each page (except for the battle page) has a navigation bar at the top. Each navigation bar utilizes a flexbox to display the links horizontally. Hover over each link in the navigation bar to see some fun, responsive animations.
+* <b>Responsive to window resizing</b> - The navigation bar on each page utilizes flex to dynamically change size based on the window width. Various other pages on the site use flexboxes to ensure content can be viewed on different sized screens. One notable example of this is the challenger selection screen on the Playground page - each challenger is an element in a flexbox which wraps elements on the next line once a row is filled. Resizing this window will change the number of elements per row.
+* <b>Application elements</b> - Good whitespace and consistent color use. Lots of use of keyframe animation, which was very fun to do. Hover over the images and text on the fight page to see a sample animation representing how the page will animate when a battle begins. The playground page also has hover animations.
+* <b>Application text content</b> - Used consistent fonts throughout. Fonts are supposed to evoke a techy, robotic feel.
+* <b>Application images</b> - The placeholder images are still being used, which will eventually be dynamically updated with the avatars of the user and their challengers.
