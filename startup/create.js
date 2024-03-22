@@ -1,8 +1,9 @@
-function create() {
+async function create() {
     const prompt = document.querySelector("#prompt").value;
-    localStorage.setItem("prompt", prompt);
 
-    process(prompt);
+    await process(prompt);
+    localStorage.setItem("prompt", prompt);
+    window.location.href = "index.html";
 }
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
@@ -17,6 +18,8 @@ async function process(prompt) {
     prompt = strShorten(prompt);
 
     avatar.src = `https://fakeimg.pl/300x300?text=${prompt}`;
+
+    await sleep(1500);
 }
 
 function strShorten(str) {
