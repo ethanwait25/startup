@@ -52,8 +52,6 @@
         <a class="forfeit" href="index.html">Forfeit (Return)</a>
       </div>
 
-      <audio autoplay loop src="assets/audio/syntheticshowdown.mp3"></audio>
-
     </main>
 
     <div class="footerContainer">
@@ -62,7 +60,16 @@
         <a href="https://github.com/ethanwait25/startup">GitHub</a>
       </footer>
 
-      <script type="text/javascript" src="loadUserData.js"></script>
+      <div class="musicBox">
+        <p id="trackName">Hello</p>
+        <div class="musicControls">
+          <img alt="play" id="toggleMusic" src="assets/images/play.svg" onclick="toggleMusic()">
+          <img alt="skip" id="skipMusic" src="assets/images/skip.svg" onclick="skipTrack()">
+        </div>
+      </div>
+
     </div>
+    <script type="text/javascript" src="loadUserData.js"></script>
+    <script type="text/javascript" src="musicController.js"></script>
   </body>
 </html>

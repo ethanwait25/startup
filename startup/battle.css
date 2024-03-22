@@ -215,7 +215,25 @@ a.forfeit:active {
 .footerContainer {
     min-height: 22vh;    
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+	
+}
+
+.musicControls {
+	display: flex;
+	flex-direction: row;
+	padding-right: 50px;
+	padding-top: 25px;
+	gap: 20px;
+}
+
+.musicControls img {
+	width: 50px;
+	box-shadow: none;
+}
+
+.musicControls img:hover {
+	filter: invert(45%) sepia(100%) saturate(3.5);
 }
 
 footer {
