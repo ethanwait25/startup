@@ -1,6 +1,7 @@
 const musicDescriptions = [
     { file: "syntheticshowdown.mp3", name: "Synthetic Showdown" },
-    { file: "amotherslove.mp3", name: "A Mother's Love" }
+    { file: "amotherslove.mp3", name: "A Mother's Love" },
+    { file: "toreador.mp3", name: "Toreador March" },
 ];
 
 class musicController {
@@ -36,6 +37,7 @@ class musicController {
         this.track.pause();
         this.track.remove();
         this.track = this.loadTrack(newDescription.file);
+        this.track.loop = true;
         this.name = newDescription.name;
 
         this.playTrack();
