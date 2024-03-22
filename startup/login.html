@@ -32,7 +32,7 @@
         <div class="entryBox">
           <h2>Login</h2>
           
-          <form method="get" action="index.html">
+          <div>
             <label for="username">Username</label>
             <input type="text" id="username" />
             <br/>
@@ -40,24 +40,24 @@
             <input type="password" id="password" />
             <br/>
             <button type="submit" onclick="login()">Login</button>
-          </form>
+          </div>
         </div>
 
         <div class="entryBox">
           <h2>Register</h2>
           
-          <form method="get" action="create.html">
+          <div>
             <label for="email">Email&nbsp&nbsp&nbsp</label>
             <input type="text" id="email" />
             <br/>
             <label for="username">Username</label>
-            <input type="text" id="username" />
+            <input type="text" id="usernameRegister" />
             <br/>
             <label for="password">Password</label>
-            <input type="password" id="password" />
+            <input type="password" id="passwordRegister" />
             <br/>
-            <button type="submit">Register</button>
-          </form>
+            <button type="submit" onclick="register()">Register</button>
+          </div>
         </div>
       </div>
 
