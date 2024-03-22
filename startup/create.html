@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create | AI Warriors</title>
     <link rel="icon" href="favicon.ico" />
+
+    <script src="create.js"></script>
     <link rel="stylesheet" href="create.css" />
   </head>
   <body>
@@ -18,16 +20,16 @@
       <p>Let your mind run wild! (Appropriate entries only, please.)</p>
 
       <div class="avatarGeneration">
-        <img alt="Avatar" src="https://fakeimg.pl/300x300?text=DefaultImage" />
+        <img alt="Avatar" id="avatar" src="https://fakeimg.pl/300x300?text=DefaultImage" />
       </div>
 
       
 
       <div id="creationLine">
-        <form method="get" action="index.html">
+        <div>
           <input type="text" id="prompt" placeholder="Describe your character!" />
-          <button type="submit">Generate</button>
-        </form>
+          <button type="submit" onclick="create()">Generate</button>
+        </div>
       </div>
 
       
