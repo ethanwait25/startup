@@ -9,23 +9,28 @@
   </head>
   <body>
     <header>
-      <a href="index.html"><img class="logo" src="/assets/images/logo.png"></img></a>
+      <a href="index.html"><img class="logo" src="assets/images/logo.png"></img></a>
     </header>
 
     <main>
       <h2>Create a Synth</h2>
 
-      <div class="avatarGenerationPlaceholder">
+      <p>Let your mind run wild! (Appropriate entries only, please.)</p>
+
+      <div class="avatarGeneration">
         <img alt="Avatar" src="https://fakeimg.pl/300x300?text=DefaultImage" />
       </div>
 
-      <p>Let your mind run wild! (Appropriate entries only, please.)</p>
+      
 
-      <form method="get" action="index.html">
-        <input type="text" id="prompt" placeholder="Describe your character!" />
-        <br/>
-        <button type="submit">Generate</button>
-      </form>
+      <div id="creationLine">
+        <form method="get" action="index.html">
+          <input type="text" id="prompt" placeholder="Describe your character!" />
+          <button type="submit">Generate</button>
+        </form>
+      </div>
+
+      
 
     </main>
 
