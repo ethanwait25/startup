@@ -61,37 +61,49 @@ img {
 	box-shadow: 12px 12px 20px -12px rgba(0, 0, 0, 0.35)
 }
 
-.userAvatarBattle:hover {
+.userBox {
+	margin-right: 153px;
+}
+
+.userAvatarAnim {
 	animation: left-up 2s ease 0s 1 normal forwards;
-	box-shadow: 12px 12px 20px -12px rgba(0, 0, 0, 0.35)
-	
 }
 
-.userAvatarBattle:hover ~ .userStats {
+.userAvatarAnim ~ .userStats {
 	animation: left-up-text 2s ease 0s 1 normal forwards;
-	
 }
 
-.chalAvatar:hover {
+.chalAvatarAnim {
 	animation: right-up 2s ease 0s 1 normal forwards;
 	
 }
 
-.chalAvatar:hover ~ .chalStats {
+.chalAvatarAnim ~ .chalStats {
 	animation: right-up-text 2s ease 0s 1 normal forwards;
 	
 }
 
-.vs-center {
+.dialogueBox {
 	padding: 3em;
+	position: absolute;
 }
 
-.vs-center h1 {
+.dialogueBox h1 {
 	vertical-align: middle;
 	padding: 0;
 }
 
-.vs-center:hover {
+.dialogue {
+	padding: 0 0 2em 0;
+}
+
+.dialogueEnter {
+	/* animation: tilt-n-move-shaking 0.25s forwards,
+		text-pulse 0.6s forwards; */
+	animation: text-pulse 1s forwards;
+}
+
+.vs-fadeAnim {
 	animation: vs-fade 1s ease 0s 1 normal forwards;
 }
 
@@ -145,30 +157,6 @@ img {
 	}
 }
 
-.battleHeaders {
-	display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    vertical-align: middle;
-
-	padding: 3em 7em 3em 7em;
-}
-
-.dialogueBox {
-	width: fit-content;
-	margin: auto;
-}
-
-.dialogue {
-	padding: 0 0 2em 0;
-}
-
-.dialogue:hover {
-	animation: tilt-n-move-shaking 0.25s forwards,
-		text-pulse 0.6s forwards;
-}
-
 @keyframes tilt-n-move-shaking {
 	0% { transform: translate(0, 0) rotate(0deg); }
 	25% { transform: translate(10px, 10px) rotate(10deg); }
@@ -178,9 +166,26 @@ img {
   }
 
 @keyframes text-pulse {
-	0% { font-size: 1em }
+	0% { 
+		font-size: 1em;
+		transform: translate(0, 0) rotate(0deg); 
+	}
+	10% { transform: translate(10px, 10px) rotate(10deg); }
+	20% { transform: translate(0, 0) rotate(0eg); }
+	30% { transform: translate(-10px, 10px) rotate(-10deg); }
+	40% { transform: translate(0, 0) rotate(0deg); }
 	75% { font-size: 2em }
 	100% { font-size: 1.6em }
+}
+
+.battleHeaders {
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+
+	padding: 3em 7em 3em 7em;
 }
 
 .forfeitButton {

@@ -15,37 +15,31 @@
       <h1>Battle Start!</h1>
 
       <div class="battleHeaders">
-        <table>
-          <tr>
-            <td>
-              <div class="userAvatarBattle">
-                <img alt="User Avatar" src="https://fakeimg.pl/300x300?text=User" />
-              </div>
-              <div class="userStats">
-                <p class="userName"></p>
-                <p class="userByte">32 Byte</p>
-              </div>
-            </td>
-            <td>
-              <div class="vs-center">
-                <h1>VS.</h1>
-              </div>
-            </td>
-            <td>
-              <div class="chalAvatar">
-                <img alt="Challenger!" src="https://fakeimg.pl/300x300?text=Challenger" />
-              </div>
-              <div class="chalStats">
-                <p class="chalName">Challenger Avatar Name</p>
-                <p class="chalByte">29 Byte</p>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
 
-      <div class="dialogueBox">
-        <h2 class="dialogue">Example battle dialogue goes here!<br>The crowd goes wild!</h2>
+        <div class="userBox">
+          <div class="userAvatarBattle">
+            <img alt="User Avatar" src="https://fakeimg.pl/300x300?text=User" />
+          </div>
+          <div class="userStats">
+            <p class="userName"></p>
+            <p class="userByte">32 Byte</p>
+          </div>
+        </div>
+
+        <div class="dialogueBox">
+          <h1 class="dialogue">VS</h1>
+        </div>
+
+        <div class="chalBox">
+          <div class="chalAvatarBattle">
+            <img alt="Challenger!" src="https://fakeimg.pl/300x300?text=Challenger" />
+          </div>
+          <div class="chalStats">
+            <p class="chalName">Challenger Avatar Name</p>
+            <p class="chalByte">29 Byte</p>
+          </div>
+        </div>
+
       </div>
 
       <div class="forfeitButton">
@@ -61,15 +55,18 @@
       </footer>
 
       <div class="musicBox">
-        <p id="trackName">Hello</p>
+        <p id="trackName"></p>
         <div class="musicControls">
           <img alt="play" id="toggleMusic" src="assets/images/play.svg" onclick="toggleMusic()">
           <img alt="skip" id="skipMusic" src="assets/images/skip.svg" onclick="skipTrack()">
         </div>
       </div>
 
+      <div style="width: 50px; height: 50px; background-color: black;" onclick="initAnim()"></div>
+
     </div>
     <script type="text/javascript" src="loadUserData.js"></script>
+    <script type="text/javascript" src="battle.js"></script>
     <script type="text/javascript" src="musicController.js"></script>
   </body>
 </html>
