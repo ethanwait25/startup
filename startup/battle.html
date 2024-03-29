@@ -12,7 +12,7 @@
   <body>
 
     <main>
-      <h1>Battle Start!</h1>
+      <h1 id="battleTitle" onclick="initAnim()">Battle Start!</h1>
 
       <div class="battleHeaders">
 
@@ -21,7 +21,7 @@
             <img alt="User Avatar" src="https://fakeimg.pl/300x300?text=User" />
           </div>
           <div class="userStats">
-            <p class="userName"></p>
+            <p class="userName">User Synth</p>
             <p class="userByte">32 Byte</p>
           </div>
         </div>
@@ -61,8 +61,6 @@
           <img alt="skip" id="skipMusic" src="assets/images/skip.svg" onclick="skipTrack()">
         </div>
       </div>
-
-      <div style="width: 50px; height: 50px; background-color: black;" onclick="initAnim()"></div>
 
     </div>
     <script type="text/javascript" src="loadUserData.js"></script>

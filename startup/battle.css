@@ -157,6 +157,97 @@ img {
 	}
 }
 
+.userAvatarWinAnim {
+	animation: left-down-win 2s ease 0s 1 normal forwards;
+}
+
+.userAvatarWinAnim ~ .userStats {
+	animation: reset-text 2s ease 0s 1 normal forwards;
+}
+
+.userAvatarLoseAnim {
+	animation: left-down-lose 2s ease 0s 1 normal forwards;
+}
+
+.userAvatarLoseAnim ~ .userStats {
+	animation: reset-text 2s ease 0s 1 normal forwards;
+}
+
+@keyframes left-down-win {
+	0% {
+		transform: scale(0.5) translateX(-800px) translateY(-300px);
+	}
+
+	100% {
+		transform: scale(1.1) translateX(0) translateY(0);
+	}
+}
+
+@keyframes left-down-lose {
+	0% {
+		transform: scale(0.5) translateX(-800px) translateY(-300px);
+	}
+
+	100% {
+		transform: scale(0.7) translateX(0) translateY(0);
+	}
+}
+
+
+.chalAvatarWinAnim {
+	animation: right-down-win 2s ease 0s 1 normal forwards;
+	
+}
+
+.chalAvatarWinAnim ~ .chalStats {
+	animation: reset-text 2s ease 0s 1 normal forwards;
+	
+}
+
+.chalAvatarLoseAnim {
+	animation: right-down-lose 2s ease 0s 1 normal forwards;
+	
+}
+
+.chalAvatarLoseAnim ~ .chalStats {
+	animation: reset-text 2s ease 0s 1 normal forwards;
+	
+}
+
+@keyframes right-down-win {
+	0% {
+		transform: scale(0.5) translateX(800px) translateY(-300px);
+	}
+
+	100% {
+		transform: scale(1.1) translateX(0) translateY(0);
+	}
+}
+
+@keyframes right-down-lose {
+	0% {
+		transform: scale(0.5) translateX(800px) translateY(-300px);
+	}
+
+	100% {
+		transform: scale(0.7) translateX(0) translateY(0);
+	}
+}
+
+@keyframes reset-text {
+	0% {
+		opacity: 0;
+	}
+	80% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 100;
+		transform: translateX(0) translateY(30px);
+		text-align: center;
+	}
+}
+
 @keyframes tilt-n-move-shaking {
 	0% { transform: translate(0, 0) rotate(0deg); }
 	25% { transform: translate(10px, 10px) rotate(10deg); }
@@ -176,6 +267,17 @@ img {
 	40% { transform: translate(0, 0) rotate(0deg); }
 	75% { font-size: 2em }
 	100% { font-size: 1.6em }
+}
+
+.byteWinner {
+	font-size: 25px;
+	color: darkgreen;
+	font-weight: bold;
+}
+
+.byteLoser {
+	color: darkred;
+	font-weight: bold;
 }
 
 .battleHeaders {
@@ -227,6 +329,11 @@ a.forfeit:active {
 
 .musicBox {
 	margin-top: 50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 200px;
 }
 
 .musicBox p {
@@ -237,8 +344,7 @@ a.forfeit:active {
 .musicControls {
 	display: flex;
 	flex-direction: row;
-	padding-right: 50px;
-	padding-top: 25px;
+	padding-top: 15px;
 	gap: 20px;
 }
 
