@@ -60,3 +60,11 @@ For this deliverable, I used CSS to style the structure I built in the previous 
 * <b>Application elements</b> - Good whitespace and consistent color use. Lots of use of keyframe animation, which was very fun to do. Hover over the images and text on the fight page to see a sample animation representing how the page will animate when a battle begins. The playground page also has hover animations.
 * <b>Application text content</b> - Used consistent fonts throughout. Fonts are supposed to evoke a techy, robotic feel.
 * <b>Application images</b> - The placeholder images are still being used, which will eventually be dynamically updated with the avatars of the user and their challengers.
+
+## JavaScript Deliverable
+For this deliverable, I implemented client-side JavaScript functionality that will soon be used to create a multiplayer game. Additionally, placeholders have been added for some future technology.
+
+* <b>Login</b> - Added base functionality to the Login page. When an account is created or logged into, the user's information is stored. If a user attempts to leave account creation before generating their character, they are forced to create an avatar before being allowed to access other pages on the site.
+* <b>Database</b> - When a user logs in, their Synth (character) name is loaded dynamically into menu bars and on the fight page. Currently, this is stored and retrieved from local storage, but it will be replaced with the database at a later stage.
+* <b>WebSocket</b> - Created placeholder dialogue displays which will be sent from the server to the battling users during battle sequences. This will be replaced with Websockets at a later stage. Also created a placeholder battle sequence start, which will be replaced eventually by a server message to the clients through WebSocket.
+* <b>Application Functionality</b> - Battle sequences now play when manually activated from the fight page. Navigate to the battle page and click "Battle Start!" at the top of the window, then click anywhere on screen as dialogue appears to continue the battle sequence. In later phases, this will not be manually activated, but activated through a WebSocket message to the application to begin. Also added music functionality, in which tracks can be muted and skipped to shuffle the soundtrack.
