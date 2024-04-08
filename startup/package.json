@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A startup application for BYU CS 260: Web Programming.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/ethanwait25/startup/issues"
   },
-  "homepage": "https://github.com/ethanwait25/startup#readme"
+  "homepage": "https://github.com/ethanwait25/startup#readme",
+  "dependencies": {
+    "prodia": "^0.3.0"
+  }
 }

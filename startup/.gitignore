@@ -1,0 +1,4 @@
+.vscode/
+.DS_Store
+mongoTest/dbConfig.json
+node_modules/
