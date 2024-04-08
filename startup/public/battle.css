@@ -61,6 +61,11 @@ img {
 	box-shadow: 12px 12px 20px -12px rgba(0, 0, 0, 0.35)
 }
 
+#userAvatar {
+    width: 300px;
+    height: 300px;
+}
+
 .userBox {
 	margin-right: 153px;
 }

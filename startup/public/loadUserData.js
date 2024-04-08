@@ -17,9 +17,13 @@ function getSynthPrompt(len) {
 const userNameEl = document.querySelector('.userName');
 
 if (window.location.pathname.split("/").pop() == "battle.html") {
-    console.log("here!");
     userNameEl.textContent = getSynthPrompt(battlePromptLength);
 } else {
-    console.log("here 2!");
     userNameEl.textContent = getSynthPrompt(defaultPromptLength);
+}
+
+const userAvatar = document.querySelector('#userAvatar');
+
+if (localStorage.getItem('imageUrl') != null) {
+    userAvatar.src = localStorage.getItem('imageUrl');
 }

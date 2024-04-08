@@ -23,6 +23,11 @@ div.userHeader {
     align-items: center;
 }
 
+#userAvatar {
+    width: 125px;
+    height: 125px;
+}
+
 .logo {
     width: 300px;
 }

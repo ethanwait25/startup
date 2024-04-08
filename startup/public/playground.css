@@ -27,6 +27,11 @@ div.userHeader {
     width: 300px;
 }
 
+#userAvatar {
+    width: 125px;
+    height: 125px;
+}
+
 ul.main-menu {
     color: #f9b873;
     list-style-type: none;
