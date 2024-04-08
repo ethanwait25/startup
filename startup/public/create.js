@@ -1,6 +1,25 @@
-const MODEL = "absolutereality_v181.safetensors [3d9d4d2b]";
+var API_KEY = null;
+var MODEL = null;
+
+async function initializeConfig() {
+  await fetch("config.json")
+    .then(response => response.json())
+    .then(json => { 
+      console.log(json.apiKey);
+      console.log(json.model);
+      API_KEY = json.apiKey;
+      MODEL = json.model; 
+    });
+
+  console.log(API_KEY);
+  console.log(MODEL);
+}
 
 async function create() {
+    if (API_KEY == null || MODEL == null) {
+      await initializeConfig();
+    }
+
     const prompt = document.querySelector("#prompt").value;
 
     const imageUrl = await process(prompt);
@@ -55,7 +74,7 @@ async function getGeneratedImageUrl(job) {
         headers: {
           accept: 'application/json',
           'content-type': 'application/json',
-          'X-Prodia-Key': '472a7454-0812-414d-8a69-bc66d7c71482'
+          'X-Prodia-Key': API_KEY
         },
       };
       
@@ -71,4 +90,4 @@ async function getGeneratedImageUrl(job) {
     return response.imageUrl;
 }
 
-console.log("Hi!");
+initializeConfig();
