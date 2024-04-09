@@ -47,7 +47,11 @@ async function getUserByte() {
 
 function setUserByte() {
     const userByte = document.querySelector('.userByte');
-    userByte.textContent = localStorage.getItem('userByte') + " Byte";
+    if (localStorage.getItem('userByte') == null || localStorage.getItem('userByte') == "undefined") {
+        userByte.textContent = "32 Byte";
+    } else {
+        userByte.textContent = localStorage.getItem('userByte') + " Byte";
+    }
 }
 
 const userNameEl = document.querySelector('.userName');
