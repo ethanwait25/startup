@@ -66,6 +66,11 @@ img {
     height: 300px;
 }
 
+#chalAvatar {
+    width: 300px;
+    height: 300px;
+}
+
 .userBox {
 	margin-right: 153px;
 }

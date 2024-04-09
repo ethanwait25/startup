@@ -3,6 +3,8 @@ var winner = true;
 var API_KEY = null;
 var BASE_PROMPT = null;
 var EMAIL = "";
+var PLAYER_NAME = "";
+var CHAL_NAME = "";
 
 async function initializeConfig() {
   await fetch("config.json")
@@ -12,7 +14,9 @@ async function initializeConfig() {
       BASE_PROMPT = json.basePrompt;
     });
 
-    EMAIL = document.querySelector(".email");
+    EMAIL = localStorage.getItem("email");
+    PLAYER_NAME = localStorage.getItem("userName");
+    CHAL_NAME = "defaultChal";
 
   console.log(API_KEY);
   console.log(BASE_PROMPT);
@@ -27,7 +31,8 @@ async function startBattle() {
     const chalName = document.querySelector(".chalName");
 
     chalName.textContent = "A dog with a jetpack";
-    console.log(userName);
+    const chalAvatar = document.querySelector("#chalAvatar");
+    chalAvatar.src = "assets/images/dog-jetpack.png";
 
     var dialogue = await createDialogue(userName, chalName.textContent);
 
@@ -85,8 +90,13 @@ async function battleEndAnim() {
     if (winner == true) {
         userAvatarBattleEl.classList.add("userAvatarWinAnim");
         chalAvatarBattleEl.classList.add("chalAvatarLoseAnim");
-        userByte.textContent = updateByteText(userByte.textContent, scoreAdjust);
-        chalByte.textContent = updateByteText(chalByte.textContent, -scoreAdjust);
+
+        var newUserByte = updateByteText(userByte.textContent, scoreAdjust);
+        var newChalByte = updateByteText(chalByte.textContent, -scoreAdjust);
+
+        userByte.textContent = newUserByte;
+        chalByte.textContent = newChalByte;
+
         userByte.classList.add("byteWinner");
         chalByte.classList.add("byteLoser");
         await waitforAnimation(userAvatarBattleEl);
@@ -94,13 +104,51 @@ async function battleEndAnim() {
     } else {
         userAvatarBattleEl.classList.add("userAvatarLoseAnim");
         chalAvatarBattleEl.classList.add("chalAvatarWinAnim");
-        userByte.textContent = updateByteText(userByte.textContent, -scoreAdjust);
-        chalByte.textContent = updateByteText(chalByte.textContent, scoreAdjust);
+
+        var newUserByte = updateByteText(userByte.textContent, -scoreAdjust);
+        var newChalByte = updateByteText(chalByte.textContent, scoreAdjust);
+
+        userByte.textContent = newUserByte;
+        chalByte.textContent = newChalByte;
+
         userByte.classList.add("byteLoser");
         chalByte.classList.add("byteWinner");
         await waitforAnimation(userAvatarBattleEl);
         await waitforAnimation(chalAvatarBattleEl);
     }
+
+    updateUserByte(newUserByte.substring(0, newUserByte.indexOf(' ')), PLAYER_NAME);
+}
+
+async function updateUserByte(newScore, playerName) {
+    var requestBody = {
+        "playerName": playerName,
+        "score": newScore
+    }
+
+    const options = {
+        method: 'POST',
+        headers: {
+          accept: 'application/json',
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(requestBody)
+    };
+
+    console.log(options);
+      
+    try {
+        const response = await fetch('/api/score', options);
+        scores = await response.json();
+
+        if (scores.status != 200) {
+            throw "Error updating user byte.";
+        }
+    
+        localStorage.setItem('userByte', newScore);
+      } catch {
+        console.log("Error updating user byte.")
+      }
 }
 
 function getRandomInteger(min, max) {
@@ -224,6 +272,12 @@ function parseDialogue(text) {
 
     return dialogue;
 }
+
+const chalName = document.querySelector(".chalName");
+
+chalName.textContent = "A dog with a jetpack";
+const chalAvatar = document.querySelector("#chalAvatar");
+chalAvatar.src = "assets/images/dog-jetpack.png";
 
 initializeConfig();
 startBattle();

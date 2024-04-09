@@ -18,15 +18,16 @@ exec("lcp --proxyUrl https://api.prodia.com");
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-// GetScores
-apiRouter.get('/scores', (_req, res) => {
-  res.send(scores);
+// GetScore
+apiRouter.get('/score', (req, res) => {
+  var reply = getUserByte(req.query.playerName);
+  res.send(reply);
 });
 
-// SubmitScore
+// SetScore
 apiRouter.post('/score', (req, res) => {
-  scores = updateScores(req.body, scores);
-  res.send(scores);
+  var reply = updateUserByte(req.body);
+  res.send(reply);
 });
 
 // Return the application's default page if the path is unknown
@@ -37,3 +38,17 @@ app.use((_req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+
+var scores = new Map();
+
+function getUserByte(userName) {
+  var score = new Map();
+  score.set("score", scores.get(userName));
+  return JSON.stringify(score);
+}
+
+function updateUserByte(body) {
+  scores.set(body.playerName, body.score);
+  return JSON.stringify({ "status": 200 });
+}
