@@ -120,6 +120,10 @@ async function battleEndAnim() {
     updateUserByte(newUserByte.substring(0, newUserByte.indexOf(' ')), PLAYER_NAME);
 }
 
+async function updateScores() {
+    
+}
+
 async function updateUserByte(newScore, playerName) {
     var requestBody = {
         "playerName": playerName,
@@ -149,6 +153,13 @@ async function updateUserByte(newScore, playerName) {
       } catch {
         console.log("Error updating user byte.")
       }
+}
+
+function forfeit() {
+    const userByte = localStorage.getItem("userByte");
+    var scoreAdjust = getRandomInteger(3, 13);
+    var newUserByte = updateByteText(userByte, -scoreAdjust);
+    updateUserByte(newUserByte.substring(0, newUserByte.indexOf(' ')), PLAYER_NAME);
 }
 
 function getRandomInteger(min, max) {
