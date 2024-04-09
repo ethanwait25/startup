@@ -68,3 +68,12 @@ For this deliverable, I implemented client-side JavaScript functionality that wi
 * <b>Database</b> - When a user logs in, their Synth (character) name is loaded dynamically into menu bars and on the fight page. Currently, this is stored and retrieved from local storage, but it will be replaced with the database at a later stage.
 * <b>WebSocket</b> - Created placeholder dialogue displays which will be sent from the server to the battling users during battle sequences. This will be replaced with Websockets at a later stage. Also created a placeholder battle sequence start, which will be replaced eventually by a server message to the clients through WebSocket.
 * <b>Application Functionality</b> - Battle sequences now play when manually activated from the fight page. Navigate to the battle page and click "Battle Start!" at the top of the window, then click anywhere on screen as dialogue appears to continue the battle sequence. In later phases, this will not be manually activated, but activated through a WebSocket message to the application to begin. Also added music functionality, in which tracks can be muted and skipped to shuffle the soundtrack.
+
+## Services Deliverable
+For this deliverable, I created an HTTP Service. My application calls that backend service from the frontend to request and update users' scores. I also added third-party API calls that complete the funcitonality of my game.
+
+* <b>Node.js/Express HTTP service</b> - Finished! Created HTTP service using both.
+* <b>Static middleware for frontend</b> - Finished! The pages are served up through the Express static middleware.
+* <b>Calls to third party endpoints</b> - Implemented the calls to APIs from both Prodia and OpenAI, which provides the image generation and fight dialogue generation functionality. Click "login" and "register", then navigate to "fight" after completion to see this in action.
+* <b>Backend service endpoints</b> - The backend now supports API calls to GET /score and POST /score, which return a specific user's store (specified through a query parameter) and update a specified users score, respectively.
+*<b>Frontend calls service endpoints</b> - The frontend calls these endpoints using fetch() and uses the returned data to display the user's "Byte" (level/score) throughout the site.
