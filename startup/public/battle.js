@@ -1,6 +1,48 @@
 var winner = true;
 
-async function initAnim() {
+var API_KEY = null;
+var BASE_PROMPT = null;
+var EMAIL = "";
+
+async function initializeConfig() {
+  await fetch("config.json")
+    .then(response => response.json())
+    .then(json => { 
+      API_KEY = json.openAiKey;
+      BASE_PROMPT = json.basePrompt;
+    });
+
+    EMAIL = document.querySelector(".email");
+
+  console.log(API_KEY);
+  console.log(BASE_PROMPT);
+}
+
+async function startBattle() {
+    if (API_KEY == null || BASE_PROMPT == null) {
+        await initializeConfig();
+      }
+
+    const userName = localStorage.getItem("prompt");
+    const chalName = document.querySelector(".chalName");
+
+    chalName.textContent = "A dog with a jetpack";
+    console.log(userName);
+
+    var dialogue = await createDialogue(userName, chalName.textContent);
+
+    if (dialogue[3] == "1") {
+        winner = true;
+    } else if (dialogue[3] == "2") {
+        winner = false;
+    } else {
+        console.log("Error: Winner not found.")
+    }
+
+    await initAnim(dialogue);
+}
+
+async function initAnim(dialogue) {
     const userAvatarBattleEl = document.querySelector(".userAvatarBattle");
     const chalAvatarBattleEl = document.querySelector(".chalAvatarBattle");
     const dialogueEl = document.querySelector(".dialogue");
@@ -15,11 +57,9 @@ async function initAnim() {
     dialogueEl.classList.remove("vs-fadeAnim");
     resetAnimation(dialogueEl);
 
-    await setDialogue("It's gonna be an awesome day!");
-    await setDialogue("Because you are testing this awesome page!");
-    await setDialogue("This is where battle dialogue will go!");
-    await setDialogue("Isn't it neat?");
-    await setDialogue("Yippee, hooray!");
+    await setDialogue(dialogue[0]);
+    await setDialogue(dialogue[1]);
+    await setDialogue(dialogue[2]);
     await setDialogue("", false);
 
     await battleEndAnim();
@@ -105,3 +145,85 @@ function waitforClick() {
 function resetAnimation(element) {
     element.scrollBy(0, 0);
 }
+
+async function createDialogue(userName, chalName) {
+    var testPrompt = `${userName} vs. ${chalName}`;
+    var response = await generateDialogue(testPrompt);
+    var dialogue = await parseDialogue(response);
+    console.log(dialogue);
+    return dialogue;
+}
+
+async function generateDialogue(prompt) {
+    var requestBody = {
+        "model": "gpt-3.5-turbo",
+        "user": EMAIL,
+        "messages": [
+            {
+                "role": "system",
+                "content": BASE_PROMPT
+            },
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ]
+    }
+
+    const options = {
+        method: 'POST',
+        headers: {
+          accept: 'application/json',
+          'content-type': 'application/json',
+          'Authorization': `Bearer ${API_KEY}`
+        },
+        body: JSON.stringify(requestBody)
+    };
+      
+    const response = await fetch('https://api.openai.com/v1/chat/completions', options)
+        .then(response => response.json())
+        .then(response => {
+          return response;
+        })
+        .catch(err => console.error(err));
+    return response.choices[0].message.content;
+}
+
+function parseDialogue(text) {
+    dialogue = [];
+
+    var startIndex = text.indexOf("Turn 1:") + "Turn 1:".length;
+    var endIndex = text.indexOf("Turn 2");
+
+    var firstTurn = text.substring(startIndex, endIndex).trim();
+
+    startIndex = text.indexOf("Turn 2:") + "Turn 2:".length;
+    endIndex = text.indexOf("Turn 3");
+
+    var secondTurn = text.substring(startIndex, endIndex).trim();
+
+    startIndex = text.indexOf("Turn 3:") + "Turn 3:".length;
+    endIndex = text.indexOf("WINNER");
+
+    var thirdTurn = text.substring(startIndex, endIndex).trim();
+
+    let match = text.match(/WINNER: (\d+)/);
+
+    var winner = null;
+    if (match) {
+        winner = match[1];
+        console.log(winner);
+    } else {
+        console.log("Winner not found");
+    }
+
+    dialogue.push(firstTurn);
+    dialogue.push(secondTurn);
+    dialogue.push(thirdTurn);
+    dialogue.push(winner);
+
+    return dialogue;
+}
+
+initializeConfig();
+startBattle();

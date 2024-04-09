@@ -5,9 +5,7 @@ async function initializeConfig() {
   await fetch("config.json")
     .then(response => response.json())
     .then(json => { 
-      console.log(json.apiKey);
-      console.log(json.model);
-      API_KEY = json.apiKey;
+      API_KEY = json.prodiaKey;
       MODEL = json.model; 
     });
 
@@ -54,7 +52,7 @@ async function createGeneration(userPrompt) {
         headers: {
           accept: 'application/json',
           'content-type': 'application/json',
-          'X-Prodia-Key': '472a7454-0812-414d-8a69-bc66d7c71482'
+          'X-Prodia-Key': API_KEY
         },
         body: JSON.stringify({ prompt: `${userPrompt}`, model: `${MODEL}` })
       };

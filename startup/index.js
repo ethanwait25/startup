@@ -1,5 +1,5 @@
 import express from 'express';
-import cors from 'cors';
+import { exec } from "child_process";
 const app = express();
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
@@ -10,6 +10,9 @@ app.use(express.json());
 
 // Serve up the front-end static content hosting
 app.use(express.static('public'));
+
+// Starts Prodia proxy server
+exec("lcp --proxyUrl https://api.prodia.com");
 
 // Router for service endpoints
 var apiRouter = express.Router();
