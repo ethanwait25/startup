@@ -11,11 +11,11 @@ The recent explosion of interest in generative AI has raised a number of controv
 AI Warriors is a multiplayer pseudo-RPG, all powered by generative AI. Users create an avatar (a "Synth") for which the sky's the limit! Would you like to play as a polar bear with chainsaw hands? How about a mug of root beer? Your choice of character will have a significant impact on its ability to survive in the arena. Go head-to-head with other Synths from across the globe to compete for ultimate power and glory! May the most (artificially) intelligent win!
 
 ### Design
-![Home Page of AI Warriors](startup/assets/images/mockUI/home.png)
-![Joining a Quick Fight and waiting for an opponent](startup/assets/images/mockUI/waitingforplayer.png)
-![A player has joined our Quick Fight](startup/assets/images/mockUI/playerjoined.png)
-![A battle rages on!](startup/assets/images/mockUI/battle.png)
-![Tragedy... The battle has ended in defeat](startup/assets/images/mockUI/battlewon.png)
+![Home Page of AI Warriors](startup/public/assets/images/mockUI/home.png)
+![Joining a Quick Fight and waiting for an opponent](startup/public/assets/images/mockUI/waitingforplayer.png)
+![A player has joined our Quick Fight](startup/public/assets/images/mockUI/playerjoined.png)
+![A battle rages on!](startup/public/assets/images/mockUI/battle.png)
+![Tragedy... The battle has ended in defeat](startup/public/assets/images/mockUI/battlewon.png)
 
 
 ### Key Features
