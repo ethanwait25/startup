@@ -12,7 +12,12 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // Starts Prodia proxy server
-exec("lcp --proxyUrl https://api.prodia.com");
+const proxyServer = exec("lcp --proxyUrl https://api.prodia.com");
+
+process.on("SIGINT", () => {
+  proxyServer.kill();
+  process.exit(0);
+});
 
 // Router for service endpoints
 var apiRouter = express.Router();
