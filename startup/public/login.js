@@ -3,17 +3,22 @@ function login() {
   const nameEl = document.querySelector("#username");
   localStorage.setItem("userName", nameEl.value);
   window.location.href = "index.html";
+
+  return true;
 }
 
-function register() {
+async function register() {
   localStorage.clear();
   const nameEl = document.querySelector("#usernameRegister");
   localStorage.setItem("userName", nameEl.value);
   const emailEl = document.querySelector("#email");
   localStorage.setItem("email", emailEl.value);
+
+  await updateUserByte(25, localStorage.getItem("userName"));
+
   window.location.href = "create.html";
 
-  updateUserByte(25, localStorage.getItem("userName"));
+  return true;
 
 }
 
