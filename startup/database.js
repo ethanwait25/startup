@@ -18,24 +18,29 @@ const avatarCollection = db.collection('avatars');
   process.exit(1);
 });
 
-function getUser(email) {
+async function getUserByName(username) {
+  return userCollection.findOne({ username: username });
+}
+
+async function getUserByEmail(email) {
   return userCollection.findOne({ email: email });
 }
 
-function getUserByToken(token) {
+async function getUserByToken(token) {
   return userCollection.findOne({ token: token });
 }
 
-function getAvatar(user) {
-  return avatarCollection.findOne({ user: user });
+async function getAvatar(username) {
+  return avatarCollection.findOne({ username: username });
 }
 
-async function createUser(email, password) {
+async function createUser(email, username, password) {
   // Hash the password before we insert it into the database
   const passwordHash = await bcrypt.hash(password, 10);
 
   const user = {
     email: email,
+    username: username,
     password: passwordHash,
     token: uuid.v4(),
   };
@@ -44,22 +49,38 @@ async function createUser(email, password) {
   return user;
 }
 
-function createAvatar(user, prompt, image) {
+async function createAvatar(username, prompt, image) {
 
   const avatar = {
-    user: user,
+    username: username,
     prompt: prompt,
     image: image,
     byte: 25
   };
 
   avatarCollection.insertOne(avatar);
+
+  return avatar;
+}
+
+async function updateScore(username, score) {
+  try {
+    await avatarCollection.updateOne(
+      { username: username },
+      { $set: { byte: score } }
+    );
+
+  } catch (error) {
+    return null;
+  }
 }
 
 module.exports = {
-  getUser,
+  getUserByName,
+  getUserByEmail,
   getUserByToken,
   getAvatar,
   createUser,
-  createAvatar
+  createAvatar,
+  updateScore
 };
