@@ -25,10 +25,11 @@
       <div class="menu">
         <ul class="main-menu">
           <li class="main-menu-item"><a href="index.html">Home</a></li>
-          <li class="main-menu-item"><a href="battle.html">Fight</a></li>
-          <li class="main-menu-item"><a href="playground.html">Playground</a></li>
+          <li class="main-menu-item playControls"><a href="battle.html">Fight</a></li>
+          <li class="main-menu-item playControls"><a href="playground.html">Playground</a></li>
           <li class="main-menu-item"><a href="about.html">About</a></li>
-          <li class="main-menu-item"><a href="login.html">Login</a></li>
+          <li class="main-menu-item loginControls"><a href="login.html">Login</a></li>
+          <li class="main-menu-item playControls"><a href="https://www.google.com">Logout</a></li>
         </ul>
       </div>
 
@@ -40,7 +41,14 @@
       <div class="contentArea">
         <h2>Welcome to AI Warriors!</h2>
         <p>May the most (artificially) intelligent win!</p>
-        <p>Join a quick fight by clicking "Fight", or browse the playground for a worthy opponent!</p>
+
+        <div class="loginControls" style="display: none">
+          <p>Login or create an account to get into the arena!</p>
+        </div>
+
+        <div class="playControls" style="display: none">
+          <p>Join a quick fight by clicking "Fight", or browse the playground for a worthy opponent!</p>
+        </div>
       </div>
     </main>
 

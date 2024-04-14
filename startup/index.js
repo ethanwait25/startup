@@ -3,7 +3,7 @@ import cookieParser from "cookie-parser";
 import bcrypt from "bcrypt";
 import express from "express";
 const app = express();
-const DB = require('./database.js');
+import * as DB from "./database.js";
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;

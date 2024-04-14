@@ -1,6 +1,17 @@
 const defaultPromptLength = 25;
 const battlePromptLength = 35;
 
+(async () => {
+    const userName = localStorage.getItem('userName');
+    if (userName) {
+      setDisplay('loginControls', 'none');
+      setDisplay('playControls', 'block');
+    } else {
+      setDisplay('loginControls', 'block');
+      setDisplay('playControls', 'none');
+    }
+})();
+
 function getUserName() {
     return localStorage.getItem('userName') ?? 'Guest';
 }
@@ -75,3 +86,9 @@ if (localStorage.getItem("userByte" == null) || localStorage.getItem("userByte")
     setUserByte();
 }
 
+function setDisplay(controlId, display) {
+    const displayEls = document.querySelectorAll(`.${controlId}`);
+    displayEls.forEach(item => {
+        item.style.display = display;
+    });
+}
