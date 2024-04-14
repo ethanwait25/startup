@@ -20,9 +20,12 @@
   },
   "homepage": "https://github.com/ethanwait25/startup#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "child_process": "^1.0.2",
     "cors": "^2.8.5",
     "express": "^4.19.2",
-    "prodia": "^0.3.0"
+    "mongodb": "^6.5.0",
+    "prodia": "^0.3.0",
+    "uuid": "^9.0.1"
   }
 }

@@ -5,9 +5,9 @@ const config = require('./dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
-const db = client.db('simon');
+const db = client.db('startup');
 const userCollection = db.collection('user');
-const scoreCollection = db.collection('score');
+const avatarCollection = db.collection('avatars');
 
 // This will asynchronously test the connection and exit the process if it fails
 (async function testConnection() {
@@ -26,6 +26,10 @@ function getUserByToken(token) {
   return userCollection.findOne({ token: token });
 }
 
+function getAvatar(user) {
+  return avatarCollection.findOne({ user: user });
+}
+
 async function createUser(email, password) {
   // Hash the password before we insert it into the database
   const passwordHash = await bcrypt.hash(password, 10);
@@ -40,24 +44,22 @@ async function createUser(email, password) {
   return user;
 }
 
-function addScore(score) {
-  scoreCollection.insertOne(score);
-}
+function createAvatar(user, prompt, image) {
 
-function getHighScores() {
-  const query = { score: { $gt: 0, $lt: 900 } };
-  const options = {
-    sort: { score: -1 },
-    limit: 10,
+  const avatar = {
+    user: user,
+    prompt: prompt,
+    image: image,
+    byte: 25
   };
-  const cursor = scoreCollection.find(query, options);
-  return cursor.toArray();
+
+  avatarCollection.insertOne(avatar);
 }
 
 module.exports = {
   getUser,
   getUserByToken,
+  getAvatar,
   createUser,
-  addScore,
-  getHighScores,
+  createAvatar
 };
