@@ -278,10 +278,19 @@ function parseDialogue(text) {
 }
 
 const chalName = document.querySelector(".chalName");
-
-chalName.textContent = "A dog with a jetpack";
 const chalAvatar = document.querySelector("#chalAvatar");
-chalAvatar.src = "assets/images/dog-jetpack.png";
+const opponent = localStorage.getItem('opponent');
+
+// Not chosen through playground
+if (!opponent) {
+
+    // Get opponent through WebSocket
+
+    opponent = localStorage.getItem('opponent');
+}
+
+chalName.textContent = opponent.prompt;
+chalAvatar.src = opponent.image;
 
 initializeConfig();
 startBattle();
