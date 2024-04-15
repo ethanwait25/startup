@@ -96,12 +96,6 @@ apiRouter.post('/avatar', async (req, res) => {
   res.status(200).send(reply);
 });
 
-// GET SCORE
-apiRouter.get('/score', async (req, res) => {
-  var user = await DB.getUserByName(req.body.username);
-  res.send({ score: user.byte });
-});
-
 // UPDATE SCORE
 apiRouter.post('/score', async (req, res) => {
   const user = await DB.getUserByName(req.body.username);
@@ -141,17 +135,3 @@ function setAuthCookie(res, authToken) {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
-
-
-var scores = new Map();
-
-// function getUserByte(userName) {
-//   var score = new Map();
-//   score.set("score", scores.get(userName));
-//   return JSON.stringify(score);
-// }
-
-// function updateUserByte(body) {
-//   scores.set(body.playerName, body.score);
-//   return JSON.stringify({ "status": 200 });
-// }

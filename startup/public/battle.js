@@ -139,6 +139,7 @@ async function updateUserByte(newScore) {
         if (response.ok) {
             var avatarModify = JSON.parse(avatarJson);
             avatarModify.byte = body.score;
+
             localStorage.setItem('avatar', JSON.stringify(avatarModify));
         } else {
             throw "Error updating user byte.";
@@ -148,11 +149,12 @@ async function updateUserByte(newScore) {
       }
 }
 
-function forfeit() {
+async function forfeit() {
     const userByte = avatar.byte;
     var scoreAdjust = getRandomInteger(3, 13);
     var newUserByte = updateByteText(userByte, -scoreAdjust);
-    updateUserByte(newUserByte.substring(0, newUserByte.indexOf(' ')));
+    await updateUserByte(newUserByte.substring(0, newUserByte.indexOf(' ')));
+    window.location.href = "index.html";
 }
 
 function getRandomInteger(min, max) {
