@@ -42,7 +42,7 @@ app.use(`/api`, apiRouter);
 apiRouter.post('/auth/create', async (req, res) => {
   console.log("Creating user");
   console.log(req.body);
-  if (await DB.getUserByEmail(req.body.email)) {
+  if (await DB.getUserByEmail(req.body.email) || await DB.getUserByName(req.body.username)) {
     console.log("Existing user");
     res.status(409).send({ msg: 'Existing user' });
   } else {
@@ -92,8 +92,10 @@ secureApiRouter.use(async (req, res, next) => {
   const authToken = req.cookies[authCookieName];
   const user = await DB.getUserByToken(authToken);
   if (user) {
+    console.log("User authenticated, can make secure calls");
     next();
   } else {
+    console.log("User unauthorized, no secure calls");
     res.status(401).send({ msg: 'Unauthorized' });
   }
 });
@@ -101,6 +103,7 @@ secureApiRouter.use(async (req, res, next) => {
 // CREATE AVATAR
 apiRouter.post('/avatar', async (req, res) => {
   const reply = await DB.createAvatar(req.body.username, req.body.prompt, req.body.image);
+  console.log("Avatar created");
   res.status(200).send(reply);
 });
 

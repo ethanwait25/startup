@@ -21,16 +21,16 @@ async function create() {
     const prompt = document.querySelector("#prompt").value;
 
     const imageUrl = await process(prompt);
-    localStorage.setItem("prompt", prompt);
-    localStorage.setItem("imageUrl", imageUrl);
     await updateDatabase(prompt, imageUrl);
     window.location.href = "index.html";
 }
 
 async function updateDatabase(prompt, imageUrl) {
 
-  const userName = localStorage.getItem('userName');
-  const response = await fetch("/avatar", {
+  const userJson = localStorage.getItem('user');
+  const user = JSON.parse(userJson);
+  const userName = user.userName;
+  const response = await fetch("/api/avatar", {
     method: 'post',
     body: JSON.stringify({ username: userName, prompt: prompt, image: imageUrl }),
     headers: {
@@ -38,11 +38,15 @@ async function updateDatabase(prompt, imageUrl) {
     },
   });
 
+  console.log("Finished creation in database");
+
   const body = await response.json();
+
+  console.log("JSON made");
 
   if (response.ok) {
     console.log("Avatar created successfully");
-    localStorage.setItem('avatar', body);
+    localStorage.setItem('avatar', JSON.stringify(body));
   } else {
     console.log("Error creating avatar");
     localStorage.setItem('avatar', null);

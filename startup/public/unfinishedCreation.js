@@ -1,12 +1,12 @@
 function unfinishedCreation() {
 
-    const username = localStorage.getItem("userName");
-    const prompt = localStorage.getItem("prompt");
+    const username = localStorage.getItem("user");
+    const avatar = localStorage.getItem("avatar");
 
-    if (username != null && prompt == null || prompt == '') {
+    if (username != null && avatar == null || avatar == 'null') {
         window.location.href = "create.html"
     }
 
 }
 
-window.onload = unfinishedCreation;
+unfinishedCreation();

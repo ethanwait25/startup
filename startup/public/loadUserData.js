@@ -1,8 +1,12 @@
 const defaultPromptLength = 25;
 const battlePromptLength = 35;
 
+const userJson = localStorage.getItem('user');
+const avatarJson = localStorage.getItem('avatar');
+const user = JSON.parse(userJson);
+const avatar = JSON.parse(avatarJson);
+
 (async () => {
-    const user = localStorage.getItem('user');
     if (user) {
       setDisplay('loginControls', 'none');
       setDisplay('playControls', 'block');
@@ -13,11 +17,11 @@ const battlePromptLength = 35;
 })();
 
 function getUserName() {
-    return localStorage.getItem('userName') ?? 'Guest';
+    return user.userName ?? 'Guest';
 }
 
 function getSynthPrompt(len) {
-    const fullPrompt = localStorage.getItem('prompt') ?? 'Guest Avatar Name';
+    const fullPrompt = avatar.prompt ?? 'Guest Avatar Name';
     var reducedPrompt = fullPrompt.substring(0, len);
     if (fullPrompt.length > len) {
         reducedPrompt += "...";
@@ -26,7 +30,7 @@ function getSynthPrompt(len) {
 }
 
 async function getUserByte() {
-    var userName = localStorage.getItem('userName') ?? 'Guest';
+    var userName = user.userName ?? 'Guest';
 
     const options = {
         method: 'GET',
@@ -75,11 +79,11 @@ if (window.location.pathname.split("/").pop() == "battle.html") {
 
 const userAvatar = document.querySelector('#userAvatar');
 
-if (localStorage.getItem('imageUrl') != null) {
-    userAvatar.src = localStorage.getItem('imageUrl');
+if (avatar.image != null) {
+    userAvatar.src = avatar.image;
 }
 
-if (localStorage.getItem("userByte" == null) || localStorage.getItem("userByte") == "undefined") {
+if (avatar.byte == null || avatar.byte == "undefined") {
     console.log("Getting user byte");
     getUserByte();
 } else {

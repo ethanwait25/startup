@@ -18,7 +18,7 @@ async function login(event) {
   if (response.ok) {
     console.log("Logged in successfully");
     localStorage.setItem('user', JSON.stringify({ userName: userName, email: body.email }));
-    localStorage.setItem('avatar', body.avatar);
+    localStorage.setItem('avatar', JSON.stringify(body.avatar));
     window.location.href = "index.html";
     return true;
   } else {
@@ -48,8 +48,8 @@ async function register(event) {
 
   if (response.ok) {
     console.log("Registered successfully");
-    localStorage.setItem('userName', "wowzers");
-    localStorage.setItem('email', email);
+    localStorage.setItem('user', JSON.stringify({ userName: userName, email: email }));
+    localStorage.setItem('avatar', 'null');
     window.location.href = "create.html";
     return true;
   } else {
