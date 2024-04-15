@@ -12,8 +12,6 @@ class musicController {
         
         this.track.loop = true;
 
-        console.log("Music Controller Created");
-
         this.playTrack();
     }
 
@@ -61,7 +59,6 @@ updateName(musicDescriptions[index].name);
 function toggleMusic() {
     var toggleMusicEl = document.querySelector("#toggleMusic");
     if (toggleMusicEl.src.split("/").pop() == "play.svg") {
-        console.log("ok");
         toggleMusicEl.src = "assets/images/mute.svg";
     } else {
         toggleMusicEl.src = "assets/images/play.svg";

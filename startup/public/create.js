@@ -8,9 +8,6 @@ async function initializeConfig() {
       API_KEY = json.prodiaKey;
       MODEL = json.model; 
     });
-
-  console.log(API_KEY);
-  console.log(MODEL);
 }
 
 async function create() {
@@ -38,14 +35,9 @@ async function updateDatabase(prompt, imageUrl) {
     },
   });
 
-  console.log("Finished creation in database");
-
   const body = await response.json();
 
-  console.log("JSON made");
-
   if (response.ok) {
-    console.log("Avatar created successfully");
     localStorage.setItem('avatar', JSON.stringify(body));
   } else {
     console.log("Error creating avatar");
