@@ -86,4 +86,4 @@ For this deliverable, I configured the database which persistently stores user d
 * <b>User registration</b> - New accounts can now be created, which stores the user data in the database.
 * <b>Login functionality</b> - Existing users can now login, which loads their database data into local storage and provides access to secure API calls.
 * <b>MongoDB credential storage</b> - The database stores encrypted credentials for each user, which it compares to user-entered credentials to determine authentication.
-* <b>Restricts functionality</b> - Users not logged in will not be able to access the "Fight" or "Playground" pages.
+* <b>Restricts functionality</b> - Users not logged in will not be able to access "Fight" or "Playground" functionality.
