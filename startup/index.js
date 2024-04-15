@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import express from "express";
 const app = express();
 import * as DB from "./database.js";
-import * as peerProxy from "./peerProxy.js";
+import { peerProxy } from "./peerProxy.js";
 
 const authCookieName = 'token';
 

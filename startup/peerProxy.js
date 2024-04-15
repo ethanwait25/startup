@@ -1,10 +1,10 @@
-import WebSocket from "ws";
+import { WebSocketServer } from "ws";
 import { v4 as uuid } from "uuid";
 
 var games = {};
 
 export function peerProxy(httpServer) {
-    const wss = new WebSocket.Server({ noServer: true });
+    const wss = new WebSocketServer({ noServer: true });
 
     // Upgrade HTTP to WebSocket
     httpServer.on('upgrade', (request, socket, head) => {
