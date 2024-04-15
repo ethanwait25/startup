@@ -99,6 +99,11 @@ main p {
     margin: 10px;
 }
 
+.chalAvatar img {
+    width: 200px;
+    height: 200px;
+}
+
 .chalAvatar img:hover {
     animation: chal-hover-avatar 0.5s forwards;
 }
