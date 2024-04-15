@@ -1,3 +1,14 @@
+var builtIn = [
+    { prompt: "Dog with a Jetpack", byte: 25, image: "assets/images/builtInOpps/dog-jetpack.png" },
+    { prompt: "Very Patriotic Turtle", byte: 25, image: "assets/images/builtInOpps/patriotic-turtle.png" },
+    { prompt: "Gordon Ramsay as a Nun", byte: 25, image: "assets/images/builtInOpps/gordon-ramsay-nun.png" },
+    { prompt: "Randy the Construction Worker", byte: 25, image: "assets/images/builtInOpps/randy-worker.png" },
+    { prompt: "Kermit the Frog", byte: 25, image: "assets/images/builtInOpps/kermit.png" },
+    { prompt: "Time Itself", byte: 25, image: "assets/images/builtInOpps/time.png" },
+    { prompt: "Someone Who Eats Their Vegetables", byte: 25, image: "assets/images/builtInOpps/eats-vegetables.png" },
+    { prompt: "Bobby McTobby", byte: 25, image: "assets/images/builtInOpps/bobby-mctobby.png" },
+];
+
 var challengers = [];
 
 (async () => {
@@ -9,7 +20,8 @@ var challengers = [];
     });
 
     if (response.ok) {
-        challengers = await response.json();
+        var online = await response.json();
+        challengers = online.concat(builtIn);
     } else {
         console.log("Error getting challengers");
     }
@@ -36,6 +48,10 @@ var challengers = [];
             <p class="chalByte">${item.byte} Byte</p>
         </div>
         `;
+        
+        div.onclick = function() {
+            localStorage.setItem("opponent", JSON.stringify(item));
+        };
 
         container.appendChild(div);
     });

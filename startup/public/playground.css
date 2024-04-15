@@ -97,6 +97,7 @@ main p {
 .chalStats p {
     text-align: center;
     margin: 10px;
+    width: 225px;
 }
 
 .chalAvatar img {
