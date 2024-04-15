@@ -86,11 +86,17 @@ export async function updateScore(username, score) {
   }
 }
 
-export function addLoggedIn(avatar) {
-  loggedInCollection.insertOne(avatar);
+export async function addLoggedIn(avatar) {
+  const user = await loggedInCollection.findOne({ username: avatar.username });
+  if (!user) {
+    loggedInCollection.insertOne(avatar);
+  }
 }
 
 export async function removeLoggedInByToken(token) {
+  if (!token) {
+    return;
+  }
   const user = await userCollection.findOne({ token: token });
   return loggedInCollection.deleteOne({ username: user.username });
 }

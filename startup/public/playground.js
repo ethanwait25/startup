@@ -16,7 +16,13 @@ var challengers = [];
 
     const container = document.querySelector("#chalsContainer");
 
+    var avatarJson = localStorage.getItem("avatar");
+    var userImage = JSON.parse(avatarJson).image;
     challengers.forEach((item, index) => {
+        if (item.image == userImage) {
+            return;
+        }
+
         const div = document.createElement("div");
         div.classList.add("chal");
         div.id = `c${index + 1}`;
