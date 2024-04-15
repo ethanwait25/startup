@@ -4,7 +4,10 @@ var API_KEY = null;
 var BASE_PROMPT = null;
 var EMAIL = "";
 var PLAYER_NAME = "";
-var CHAL_NAME = "";
+
+const userAvatarBattleEl = document.querySelector(".userAvatarBattle");
+const chalAvatarBattleEl = document.querySelector(".chalAvatarBattle");
+const dialogueEl = document.querySelector(".dialogue");
 
 async function initializeConfig() {
   await fetch("config.json")
@@ -16,22 +19,20 @@ async function initializeConfig() {
 
     EMAIL = user.email;
     PLAYER_NAME = user.userName;
-    CHAL_NAME = "defaultChal";
 }
 
-async function startBattle() {
+window.onbeforeunload = function() {
+    localStorage.removeItem('opponent');
+}
+
+async function startBattle(dialogue=null) {
     if (API_KEY == null || BASE_PROMPT == null) {
         await initializeConfig();
-      }
+    }
 
-    const userName = avatar.prompt;
-    const chalName = document.querySelector(".chalName");
-
-    chalName.textContent = "A dog with a jetpack";
-    const chalAvatar = document.querySelector("#chalAvatar");
-    chalAvatar.src = "assets/images/dog-jetpack.png";
-
-    var dialogue = await createDialogue(userName, chalName.textContent);
+    if (dialogue == null) {
+        var dialogue = await createDialogue(avatar.prompt, opponent.prompt);
+    }
 
     if (dialogue[3] == "1") {
         winner = true;
@@ -45,9 +46,6 @@ async function startBattle() {
 }
 
 async function initAnim(dialogue) {
-    const userAvatarBattleEl = document.querySelector(".userAvatarBattle");
-    const chalAvatarBattleEl = document.querySelector(".chalAvatarBattle");
-    const dialogueEl = document.querySelector(".dialogue");
     
     userAvatarBattleEl.classList.add("userAvatarAnim");
     chalAvatarBattleEl.classList.add("chalAvatarAnim");
@@ -73,8 +71,6 @@ async function initAnim(dialogue) {
 }
 
 async function battleEndAnim() {
-    const userAvatarBattleEl = document.querySelector(".userAvatarBattle");
-    const chalAvatarBattleEl = document.querySelector(".chalAvatarBattle");
     const forfeitButton = document.querySelector(".forfeit")
     forfeitButton.classList.add("vs-fadeAnim");
     forfeitButton.removeAttribute("href");
@@ -166,7 +162,6 @@ function updateByteText(curByte, adjust) {
 }
 
 async function setDialogue(text, requireClick = true) {
-    const dialogueEl = document.querySelector(".dialogue");
     dialogueEl.textContent = text;
     dialogueEl.classList.add("dialogueEnter");
     await waitforAnimation(dialogueEl);
@@ -234,7 +229,7 @@ async function generateDialogue(prompt) {
     };
       
     const response = await fetch('https://api.openai.com/v1/chat/completions', options)
-        .then(response => response.json())
+        .then(async response => await response.json())
         .then(response => {
           return response;
         })
@@ -243,7 +238,7 @@ async function generateDialogue(prompt) {
 }
 
 function parseDialogue(text) {
-    dialogue = [];
+    var dialogue = [];
 
     var startIndex = text.indexOf("Turn 1:") + "Turn 1:".length;
     var endIndex = text.indexOf("Turn 2");
@@ -277,20 +272,60 @@ function parseDialogue(text) {
     return dialogue;
 }
 
+async function configureWebSocket() {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    var socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    socket.onopen = (event) => {
+        console.log('Connected to WebSocket');
+    };
+
+    socket.onclose = (event) => {
+        console.log('Disconnected from WebSocket');
+    };
+
+    socket.onmessage = async (event) => {
+        const msg = JSON.parse(await event.data.text());
+        localStorage.setItem('opponent', JSON.stringify(msg.opponent));
+        
+        battleTitleEl.textContent = "Battle Start!";
+        chalName.textContent = msg.opponent.prompt;
+        chalAvatar.src = msg.opponent.image;
+
+        initAnim(msg.dialogue);
+        socket.close();
+    };
+}
+
+
 const chalName = document.querySelector(".chalName");
 const chalAvatar = document.querySelector("#chalAvatar");
-const opponent = localStorage.getItem('opponent');
+const battleTitleEl = document.querySelector("#battleTitle");
+var opponentJson = localStorage.getItem('opponent');
+var opponent = JSON.parse(opponentJson);
+
+initializeConfig();
 
 // Not chosen through playground
 if (!opponent) {
+    battleTitleEl.textContent = "Waiting for opponent...";
 
     // Get opponent through WebSocket
+    configureWebSocket();
 
-    opponent = localStorage.getItem('opponent');
+} else {
+    
+    // Chosen through playground, start battle
+
+    battleTitleEl.textContent = "Battle Start!";
+
+    console.log(opponent.prompt);
+    console.log(opponent.image);
+
+    chalName.textContent = opponent.prompt;
+    chalAvatar.src = opponent.image;
+
+    startBattle();
+
 }
 
-chalName.textContent = opponent.prompt;
-chalAvatar.src = opponent.image;
 
-initializeConfig();
-startBattle();
