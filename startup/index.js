@@ -107,12 +107,6 @@ apiRouter.post('/avatar', async (req, res) => {
   res.status(200).send(reply);
 });
 
-// GET AVATAR
-apiRouter.get('/avatar', async (req, res) => {
-  const reply = await DB.getAvatar(req.body.username);
-  res.send(reply);
-});
-
 // GET SCORE
 apiRouter.get('/score', async (req, res) => {
   var user = await DB.getUserByName(req.body.username);
@@ -125,14 +119,13 @@ apiRouter.post('/score', async (req, res) => {
   if (user) {
     const reply = await DB.updateScore(req.body.username, req.body.score);
     if (reply) {
-      res.send({ status: 200 });
+      res.status(200).send(reply);
     } else {
       res.status(500).send({ msg: 'Server error' });
     }
   } else {
     res.status(404).send({ msg: 'Unknown' });
   }
-  res.send(reply);
 });
 
 //========================================================================

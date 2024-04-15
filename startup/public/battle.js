@@ -1,5 +1,10 @@
 var winner = true;
 
+const avatarJson = localStorage.getItem('avatar');
+const avatar = JSON.parse(avatarJson);
+const userJson = localStorage.getItem('user');
+const user = JSON.parse(userJson);
+
 var API_KEY = null;
 var BASE_PROMPT = null;
 var EMAIL = "";
@@ -14,8 +19,8 @@ async function initializeConfig() {
       BASE_PROMPT = json.basePrompt;
     });
 
-    EMAIL = localStorage.getItem("email");
-    PLAYER_NAME = localStorage.getItem("userName");
+    EMAIL = user.email;
+    PLAYER_NAME = user.userName;
     CHAL_NAME = "defaultChal";
 
   console.log(API_KEY);
@@ -27,7 +32,7 @@ async function startBattle() {
         await initializeConfig();
       }
 
-    const userName = localStorage.getItem("prompt");
+    const userName = avatar.prompt;
     const chalName = document.querySelector(".chalName");
 
     chalName.textContent = "A dog with a jetpack";
@@ -117,16 +122,16 @@ async function battleEndAnim() {
         await waitforAnimation(chalAvatarBattleEl);
     }
 
-    updateUserByte(newUserByte.substring(0, newUserByte.indexOf(' ')), PLAYER_NAME);
+    updateUserByte(newUserByte.substring(0, newUserByte.indexOf(' ')));
 }
 
 async function updateScores() {
     
 }
 
-async function updateUserByte(newScore, playerName) {
+async function updateUserByte(newScore) {
     var requestBody = {
-        "playerName": playerName,
+        "playerName": PLAYER_NAME,
         "score": newScore
     }
 
@@ -143,13 +148,16 @@ async function updateUserByte(newScore, playerName) {
       
     try {
         const response = await fetch('/api/score', options);
-        scores = await response.json();
+        body = await response.json();
 
-        if (scores.status != 200) {
+        if (response.ok == false || response.status != 20) {
             throw "Error updating user byte.";
         }
     
-        localStorage.setItem('userByte', newScore);
+        var avatarJson = localStorage.getItem('avatar');
+        var avatar = JSON.parse(avatarJson);
+        avatar.score = body.score;
+        localStorage.setItem('avatar', JSON.stringify(avatar));
       } catch {
         console.log("Error updating user byte.")
       }
@@ -159,7 +167,7 @@ function forfeit() {
     const userByte = localStorage.getItem("userByte");
     var scoreAdjust = getRandomInteger(3, 13);
     var newUserByte = updateByteText(userByte, -scoreAdjust);
-    updateUserByte(newUserByte.substring(0, newUserByte.indexOf(' ')), PLAYER_NAME);
+    updateUserByte(newUserByte.substring(0, newUserByte.indexOf(' ')));
 }
 
 function getRandomInteger(min, max) {

@@ -70,6 +70,8 @@ export async function updateScore(username, score) {
       { $set: { byte: score } }
     );
 
+    return { score: score };
+
   } catch (error) {
     return null;
   }

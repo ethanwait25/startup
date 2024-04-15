@@ -61,34 +61,3 @@ async function register(event) {
   }
 
 }
-
-async function updateUserByte(newScore, playerName) {
-  var requestBody = {
-      "playerName": playerName,
-      "score": newScore
-  }
-
-  const options = {
-      method: 'POST',
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(requestBody)
-  };
-
-  console.log(options);
-    
-  try {
-      const response = await fetch('/api/score', options);
-      scores = await response.json();
-
-      if (scores.status != 200) {
-          throw "Error updating user byte.";
-      }
-  
-      localStorage.setItem('userByte', newScore);
-    } catch {
-      console.log("Error updating user byte.")
-    }
-}
