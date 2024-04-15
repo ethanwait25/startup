@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 import bcrypt from 'bcrypt';
-import { v1 as uuid } from 'uuid';
+import { v4 as uuid } from 'uuid';
 import { default as config } from "./dbConfig.json" assert { type: "json" };
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
@@ -18,23 +18,23 @@ const avatarCollection = db.collection('avatars');
   process.exit(1);
 });
 
-async function getUserByName(username) {
+export async function getUserByName(username) {
   return userCollection.findOne({ username: username });
 }
 
-async function getUserByEmail(email) {
+export async function getUserByEmail(email) {
   return userCollection.findOne({ email: email });
 }
 
-async function getUserByToken(token) {
+export async function getUserByToken(token) {
   return userCollection.findOne({ token: token });
 }
 
-async function getAvatar(username) {
+export async function getAvatar(username) {
   return avatarCollection.findOne({ username: username });
 }
 
-async function createUser(email, username, password) {
+export async function createUser(email, username, password) {
   // Hash the password before we insert it into the database
   const passwordHash = await bcrypt.hash(password, 10);
 
@@ -42,14 +42,14 @@ async function createUser(email, username, password) {
     email: email,
     username: username,
     password: passwordHash,
-    token: uuid.v4(),
+    token: uuid()
   };
   await userCollection.insertOne(user);
 
   return user;
 }
 
-async function createAvatar(username, prompt, image) {
+export async function createAvatar(username, prompt, image) {
 
   const avatar = {
     username: username,
@@ -63,7 +63,7 @@ async function createAvatar(username, prompt, image) {
   return avatar;
 }
 
-async function updateScore(username, score) {
+export async function updateScore(username, score) {
   try {
     await avatarCollection.updateOne(
       { username: username },
@@ -74,13 +74,3 @@ async function updateScore(username, score) {
     return null;
   }
 }
-
-// module.exports = {
-//   getUserByName,
-//   getUserByEmail,
-//   getUserByToken,
-//   getAvatar,
-//   createUser,
-//   createAvatar,
-//   updateScore
-// };

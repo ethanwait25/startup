@@ -5,6 +5,8 @@ import express from "express";
 const app = express();
 import * as DB from "./database.js";
 
+const authCookieName = 'token';
+
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -38,7 +40,10 @@ app.use(`/api`, apiRouter);
 
 // REGISTER: CreateAuth token for a new user
 apiRouter.post('/auth/create', async (req, res) => {
+  console.log("Creating user");
+  console.log(req.body);
   if (await DB.getUserByEmail(req.body.email)) {
+    console.log("Existing user");
     res.status(409).send({ msg: 'Existing user' });
   } else {
     const user = await DB.createUser(req.body.email, req.body.username, req.body.password);
@@ -46,9 +51,8 @@ apiRouter.post('/auth/create', async (req, res) => {
     // Set the cookie
     setAuthCookie(res, user.token);
 
-    res.send({
-      id: user._id,
-    });
+    console.log("Created user");
+    res.status(200).send({ msg: 'Created' })
   }
 });
 
@@ -80,7 +84,7 @@ var secureApiRouter = express.Router();
 apiRouter.use(secureApiRouter);
 
 secureApiRouter.use(async (req, res, next) => {
-  authToken = req.cookies[authCookieName];
+  const authToken = req.cookies[authCookieName];
   const user = await DB.getUserByToken(authToken);
   if (user) {
     next();
@@ -151,13 +155,13 @@ app.listen(port, () => {
 
 var scores = new Map();
 
-function getUserByte(userName) {
-  var score = new Map();
-  score.set("score", scores.get(userName));
-  return JSON.stringify(score);
-}
+// function getUserByte(userName) {
+//   var score = new Map();
+//   score.set("score", scores.get(userName));
+//   return JSON.stringify(score);
+// }
 
-function updateUserByte(body) {
-  scores.set(body.playerName, body.score);
-  return JSON.stringify({ "status": 200 });
-}
+// function updateUserByte(body) {
+//   scores.set(body.playerName, body.score);
+//   return JSON.stringify({ "status": 200 });
+// }

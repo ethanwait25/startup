@@ -1,24 +1,46 @@
-function login() {
-  localStorage.clear();
-  const nameEl = document.querySelector("#username");
-  localStorage.setItem("userName", nameEl.value);
-  window.location.href = "index.html";
+function login(event) {
 
-  return true;
+  event.preventDefault();
+
+  // localStorage.clear();
+  // const nameEl = document.querySelector("#username");
+  // localStorage.setItem("userName", nameEl.value);
+  // console.log("hi")
+  // window.location.href = "index.html";
+  // console.log("hi2")
+
+  // return true;
 }
 
-async function register() {
-  localStorage.clear();
-  const nameEl = document.querySelector("#usernameRegister");
-  localStorage.setItem("userName", nameEl.value);
-  const emailEl = document.querySelector("#email");
-  localStorage.setItem("email", emailEl.value);
+async function register(event) {
 
-  await updateUserByte(25, localStorage.getItem("userName"));
+  event.preventDefault();
 
-  window.location.href = "create.html";
+  const userName = document.querySelector('#usernameRegister')?.value;
+  const email = document.querySelector('#email')?.value;
+  const password = document.querySelector('#passwordRegister')?.value;
+  console.log("Creating user: ", userName, email, password);
+  const response = await fetch("/api/auth/create", {
+    method: 'post',
+    body: JSON.stringify({ email: email, username: userName, password: password }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  });
 
-  return true;
+  if (response.ok) {
+    console.log("Registered successfully");
+    localStorage.setItem('userName', "wowzers");
+    localStorage.setItem('email', email);
+    window.location.href = "create.html";
+    return true;
+  } else {
+    console.log("Error registering");
+    const body = await response.json();
+    const errorEl = document.querySelector('#registerError');
+    errorEl.textContent = `⚠ Error: ${body.msg}`;
+    return false;
+  }
 
 }
 
