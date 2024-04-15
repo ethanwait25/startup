@@ -8,6 +8,7 @@ const client = new MongoClient(url);
 const db = client.db('startup');
 const userCollection = db.collection('user');
 const avatarCollection = db.collection('avatars');
+const loggedInCollection = db.collection('loggedIn');
 
 // This will asynchronously test the connection and exit the process if it fails
 (async function testConnection() {
@@ -55,7 +56,7 @@ export async function createAvatar(username, prompt, image) {
     username: username,
     prompt: prompt,
     image: image,
-    byte: 25
+    byte: 25,
   };
 
   avatarCollection.insertOne(avatar);
@@ -75,4 +76,13 @@ export async function updateScore(username, score) {
   } catch (error) {
     return null;
   }
+}
+
+export function addLoggedIn(avatar) {
+  loggedInCollection.insertOne(avatar);
+}
+
+export async function removeLoggedInByToken(token) {
+  const user = await userCollection.findOne({ token: token });
+  return avatarCollection.deleteOne({ username: user.username });
 }

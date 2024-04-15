@@ -59,6 +59,9 @@ apiRouter.post('/auth/login', async (req, res) => {
   if (user) {
     if (await bcrypt.compare(req.body.password, user.password)) {
       const avatar = await DB.getAvatar(req.body.username);
+      DB.addLoggedIn(avatar);
+      console.log("Adding avatar to logged in list: ", avatar.username);
+
       setAuthCookie(res, user.token);
       res.status(200).send({ msg: 'Login Successful', email: user.email, avatar: avatar });
       return;
@@ -68,7 +71,8 @@ apiRouter.post('/auth/login', async (req, res) => {
 });
 
 // LOGOUT: DeleteAuth token if stored in cookie
-apiRouter.delete('/auth/logout', (_req, res) => {
+apiRouter.delete('/auth/logout', async (_req, res) => {
+  DB.removeLoggedInByToken(_req.cookies[authCookieName]);
   res.clearCookie(authCookieName);
   res.status(204).end();
 });
@@ -93,8 +97,11 @@ secureApiRouter.use(async (req, res, next) => {
 
 // CREATE AVATAR
 apiRouter.post('/avatar', async (req, res) => {
-  const reply = await DB.createAvatar(req.body.username, req.body.prompt, req.body.image);
-  res.status(200).send(reply);
+  const avatar = await DB.createAvatar(req.body.username, req.body.prompt, req.body.image);
+  DB.addLoggedIn(avatar);
+  console.log("Adding avatar to logged in list: ", avatar.username);
+
+  res.status(200).send(avatar);
 });
 
 // UPDATE SCORE
