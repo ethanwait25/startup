@@ -62,10 +62,10 @@ async function getUserByte() {
 
 function setUserByte() {
     const userByte = document.querySelector('.userByte');
-    if (localStorage.getItem('userByte') == null || localStorage.getItem('userByte') == "undefined") {
-        userByte.textContent = "32 Byte";
+    if (avatar.byte == null || avatar.byte == "null") {
+        userByte.textContent = "Byte";
     } else {
-        userByte.textContent = localStorage.getItem('userByte') + " Byte";
+        userByte.textContent = avatar.byte + " Byte";
     }
 }
 
