@@ -25,6 +25,7 @@ export function peerProxy(httpServer) {
             if (!gameId) {
                 // Game does not exist, create a new game session
                 gameId = Object.keys(games).length + 1;
+                console.log("Creating new game session: ", gameId);
                 games[gameId] = {
                     clients: [ws],
                     users: [user],
@@ -32,6 +33,7 @@ export function peerProxy(httpServer) {
                 };
             } else {
                 // Add player to existing game session
+                console.log("Adding second player to game session: ", gameId);
                 games[gameId].players.push(ws);
                 games[gameId].users.push(user);
             }
@@ -39,8 +41,9 @@ export function peerProxy(httpServer) {
             if (games[gameId].ready) {
                 console.log("Game is full, starting game session");
                 const dialogue = await getBattleDialogue(games[gameId].users[0], games[gameId].users[1]);
-                games[gameId].clients.forEach(player => {
-                    player.send(JSON.stringify({ type: 'message', dialogue: dialogue }));
+                games[gameId].clients.forEach((player, index) => {
+                    const opponentIndex = (index + 1) % 2;
+                    player.send(JSON.stringify({ type: 'message', opponent: games[gameId].users[opponentIndex] , dialogue: dialogue }));
                 });
                 delete games[gameId];
             }

@@ -311,6 +311,7 @@ if (!opponent) {
 
     // Get opponent through WebSocket
     configureWebSocket();
+    socket.send(JSON.stringify({ user: { prompt: avatar.prompt, byte: avatar.byte, image: avatar.image } }));
 
 } else {
     
