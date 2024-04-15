@@ -77,3 +77,13 @@ For this deliverable, I created an HTTP Service. My application calls that backe
 * <b>Calls to third party endpoints</b> - Implemented the calls to APIs from both Prodia and OpenAI, which provides the image generation and fight dialogue generation functionality. Click "login" and "register", then navigate to "fight" after completion to see this in action.
 * <b>Backend service endpoints</b> - The backend now supports API calls to GET /score and POST /score, which return a specific user's store (specified through a query parameter) and update a specified users score, respectively.
 *<b>Frontend calls service endpoints</b> - The frontend calls these endpoints using fetch() and uses the returned data to display the user's "Byte" (level/score) throughout the site.
+
+## DB/Login Deliverable
+For this deliverable, I configured the database which persistently stores user data. I also implemented user registration and login functionality, and require authentication for certain API calls to my service.
+
+* <b>MongoDB Atlas database</b> - Created, done!
+* <b>Data stored in MongoDB database</b> - Finished! All user data, including login information and player profile/avatar data is all persistently stored in the database.
+* <b>User registration</b> - New accounts can now be created, which stores the user data in the database.
+* <b>Login functionality</b> - Existing users can now login, which loads their database data into local storage and provides access to secure API calls.
+* <b>MongoDB credential storage</b> - The database stores encrypted credentials for each user, which it compares to user-entered credentials to determine authentication.
+* <b>Restricts functionality</b> - Users not logged in will not be able to access the "Fight" or "Playground" pages.
