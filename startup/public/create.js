@@ -23,7 +23,33 @@ async function create() {
     const imageUrl = await process(prompt);
     localStorage.setItem("prompt", prompt);
     localStorage.setItem("imageUrl", imageUrl);
+    await updateDatabase(prompt, imageUrl);
     window.location.href = "index.html";
+}
+
+async function updateDatabase(prompt, imageUrl) {
+
+  const userName = localStorage.getItem('userName');
+  const response = await fetch("/avatar", {
+    method: 'post',
+    body: JSON.stringify({ username: userName, prompt: prompt, image: imageUrl }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  });
+
+  const body = await response.json();
+
+  if (response.ok) {
+    console.log("Avatar created successfully");
+    localStorage.setItem('avatar', body);
+  } else {
+    console.log("Error creating avatar");
+    localStorage.setItem('avatar', null);
+  }
+
+  return;
+
 }
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));

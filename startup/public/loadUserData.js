@@ -2,8 +2,8 @@ const defaultPromptLength = 25;
 const battlePromptLength = 35;
 
 (async () => {
-    const userName = localStorage.getItem('userName');
-    if (userName) {
+    const user = localStorage.getItem('user');
+    if (user) {
       setDisplay('loginControls', 'none');
       setDisplay('playControls', 'block');
     } else {

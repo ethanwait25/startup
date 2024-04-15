@@ -59,13 +59,18 @@ apiRouter.post('/auth/create', async (req, res) => {
 // LOGIN: GetAuth token for the provided credentials
 apiRouter.post('/auth/login', async (req, res) => {
   const user = await DB.getUserByName(req.body.username);
+  console.log("Attempting login");
   if (user) {
     if (await bcrypt.compare(req.body.password, user.password)) {
+      console.log("Login successful");
+      const avatar = await DB.getAvatar(req.body.username);
+      console.log(avatar);
       setAuthCookie(res, user.token);
-      res.send({ id: user._id });
+      res.status(200).send({ msg: 'Login Successful', email: user.email, avatar: avatar });
       return;
     }
   }
+  console.log("Login failed");
   res.status(401).send({ msg: 'Unauthorized' });
 });
 
@@ -96,7 +101,7 @@ secureApiRouter.use(async (req, res, next) => {
 // CREATE AVATAR
 apiRouter.post('/avatar', async (req, res) => {
   const reply = await DB.createAvatar(req.body.username, req.body.prompt, req.body.image);
-  res.send(reply);
+  res.status(200).send(reply);
 });
 
 // GET AVATAR

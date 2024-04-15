@@ -1,15 +1,33 @@
-function login(event) {
+async function login(event) {
 
   event.preventDefault();
+  
+  const userName = document.querySelector('#username')?.value;
+  const password = document.querySelector('#password')?.value;
+  console.log("Login: ", userName, password);
+  const response = await fetch("/api/auth/login", {
+    method: 'post',
+    body: JSON.stringify({ username: userName, password: password }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  });
 
-  // localStorage.clear();
-  // const nameEl = document.querySelector("#username");
-  // localStorage.setItem("userName", nameEl.value);
-  // console.log("hi")
-  // window.location.href = "index.html";
-  // console.log("hi2")
+  const body = await response.json();
 
-  // return true;
+  if (response.ok) {
+    console.log("Logged in successfully");
+    localStorage.setItem('user', JSON.stringify({ userName: userName, email: body.email }));
+    localStorage.setItem('avatar', body.avatar);
+    window.location.href = "index.html";
+    return true;
+  } else {
+    console.log("Error loggin in");
+    const errorEl = document.querySelector('#loginError');
+    errorEl.textContent = `⚠ Error: ${body.msg}`;
+    return false;
+  }
+
 }
 
 async function register(event) {
