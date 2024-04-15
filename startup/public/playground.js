@@ -1,10 +1,21 @@
-const challengers = [
-    { name: "Challenger 1", byte: "47 Byte", image: "https://fakeimg.pl/200x200?text=1" },
-    { name: "Challenger 2", byte: "31 Byte", image: "https://fakeimg.pl/200x200?text=2" },
-    { name: "Challenger 3", byte: "11 Byte", image: "https://fakeimg.pl/200x200?text=3" },
-    { name: "Challenger 4", byte: "16 Byte", image: "https://fakeimg.pl/200x200?text=4" },
-    { name: "Challenger 5", byte: "36 Byte", image: "https://fakeimg.pl/200x200?text=5" }
-];
+const challengers = [];
+
+async function getChallengers() {
+const response = await fetch("/api/active", {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  });
+
+  if (response.ok) {
+    challengers = await response.json();
+  } else {
+    console.log("Error getting challengers");
+  }
+}
+
+await getChallengers();
 
 const container = document.querySelector("#chalsContainer");
 

@@ -35,6 +35,14 @@ export async function getAvatar(username) {
   return avatarCollection.findOne({ username: username });
 }
 
+export async function getLoggedIn() {
+  return loggedInCollection.find().toArray();
+}
+
+export function resetLoggedIn() {
+  loggedInCollection.deleteMany({});
+}
+
 export async function createUser(email, username, password) {
   // Hash the password before we insert it into the database
   const passwordHash = await bcrypt.hash(password, 10);
@@ -84,5 +92,5 @@ export function addLoggedIn(avatar) {
 
 export async function removeLoggedInByToken(token) {
   const user = await userCollection.findOne({ token: token });
-  return avatarCollection.deleteOne({ username: user.username });
+  return loggedInCollection.deleteOne({ username: user.username });
 }

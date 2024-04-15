@@ -28,6 +28,9 @@ process.on("SIGINT", () => {
   process.exit(0);
 });
 
+// Reset logged in users
+DB.resetLoggedIn();
+
 // Trust headers that are forwarded from the proxy so we can determine IP addresses
 app.set('trust proxy', true);
 
@@ -59,8 +62,9 @@ apiRouter.post('/auth/login', async (req, res) => {
   if (user) {
     if (await bcrypt.compare(req.body.password, user.password)) {
       const avatar = await DB.getAvatar(req.body.username);
-      DB.addLoggedIn(avatar);
-      console.log("Adding avatar to logged in list: ", avatar.username);
+      if (avatar) {
+        DB.addLoggedIn(avatar);
+      }
 
       setAuthCookie(res, user.token);
       res.status(200).send({ msg: 'Login Successful', email: user.email, avatar: avatar });
@@ -99,8 +103,6 @@ secureApiRouter.use(async (req, res, next) => {
 apiRouter.post('/avatar', async (req, res) => {
   const avatar = await DB.createAvatar(req.body.username, req.body.prompt, req.body.image);
   DB.addLoggedIn(avatar);
-  console.log("Adding avatar to logged in list: ", avatar.username);
-
   res.status(200).send(avatar);
 });
 
@@ -117,6 +119,12 @@ apiRouter.post('/score', async (req, res) => {
   } else {
     res.status(404).send({ msg: 'Unknown' });
   }
+});
+
+// GET ACTIVE USERS
+apiRouter.get('/active', async (_req, res) => {
+  const users = await DB.getLoggedIn();
+  res.status(200).send(users);
 });
 
 //========================================================================
