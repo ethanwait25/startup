@@ -40,10 +40,7 @@ app.use(`/api`, apiRouter);
 
 // REGISTER: CreateAuth token for a new user
 apiRouter.post('/auth/create', async (req, res) => {
-  console.log("Creating user");
-  console.log(req.body);
   if (await DB.getUserByEmail(req.body.email) || await DB.getUserByName(req.body.username)) {
-    console.log("Existing user");
     res.status(409).send({ msg: 'Existing user' });
   } else {
     const user = await DB.createUser(req.body.email, req.body.username, req.body.password);
@@ -51,7 +48,6 @@ apiRouter.post('/auth/create', async (req, res) => {
     // Set the cookie
     setAuthCookie(res, user.token);
 
-    console.log("Created user");
     res.status(200).send({ msg: 'Created' })
   }
 });
@@ -59,18 +55,14 @@ apiRouter.post('/auth/create', async (req, res) => {
 // LOGIN: GetAuth token for the provided credentials
 apiRouter.post('/auth/login', async (req, res) => {
   const user = await DB.getUserByName(req.body.username);
-  console.log("Attempting login");
   if (user) {
     if (await bcrypt.compare(req.body.password, user.password)) {
-      console.log("Login successful");
       const avatar = await DB.getAvatar(req.body.username);
-      console.log(avatar);
       setAuthCookie(res, user.token);
       res.status(200).send({ msg: 'Login Successful', email: user.email, avatar: avatar });
       return;
     }
   }
-  console.log("Login failed");
   res.status(401).send({ msg: 'Unauthorized' });
 });
 
@@ -92,10 +84,8 @@ secureApiRouter.use(async (req, res, next) => {
   const authToken = req.cookies[authCookieName];
   const user = await DB.getUserByToken(authToken);
   if (user) {
-    console.log("User authenticated, can make secure calls");
     next();
   } else {
-    console.log("User unauthorized, no secure calls");
     res.status(401).send({ msg: 'Unauthorized' });
   }
 });
@@ -103,7 +93,6 @@ secureApiRouter.use(async (req, res, next) => {
 // CREATE AVATAR
 apiRouter.post('/avatar', async (req, res) => {
   const reply = await DB.createAvatar(req.body.username, req.body.prompt, req.body.image);
-  console.log("Avatar created");
   res.status(200).send(reply);
 });
 

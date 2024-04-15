@@ -1,10 +1,5 @@
 var winner = true;
 
-const avatarJson = localStorage.getItem('avatar');
-const avatar = JSON.parse(avatarJson);
-const userJson = localStorage.getItem('user');
-const user = JSON.parse(userJson);
-
 var API_KEY = null;
 var BASE_PROMPT = null;
 var EMAIL = "";
@@ -22,9 +17,6 @@ async function initializeConfig() {
     EMAIL = user.email;
     PLAYER_NAME = user.userName;
     CHAL_NAME = "defaultChal";
-
-  console.log(API_KEY);
-  console.log(BASE_PROMPT);
 }
 
 async function startBattle() {
@@ -122,16 +114,12 @@ async function battleEndAnim() {
         await waitforAnimation(chalAvatarBattleEl);
     }
 
-    updateUserByte(newUserByte.substring(0, newUserByte.indexOf(' ')));
-}
-
-async function updateScores() {
-    
+    await updateUserByte(newUserByte.substring(0, newUserByte.indexOf(' ')));
 }
 
 async function updateUserByte(newScore) {
     var requestBody = {
-        "playerName": PLAYER_NAME,
+        "username": PLAYER_NAME,
         "score": newScore
     }
 
@@ -143,28 +131,25 @@ async function updateUserByte(newScore) {
         },
         body: JSON.stringify(requestBody)
     };
-
-    console.log(options);
       
     try {
         const response = await fetch('/api/score', options);
         body = await response.json();
 
-        if (response.ok == false || response.status != 20) {
+        if (response.ok) {
+            var avatarModify = JSON.parse(avatarJson);
+            avatarModify.byte = body.score;
+            localStorage.setItem('avatar', JSON.stringify(avatarModify));
+        } else {
             throw "Error updating user byte.";
         }
-    
-        var avatarJson = localStorage.getItem('avatar');
-        var avatar = JSON.parse(avatarJson);
-        avatar.score = body.score;
-        localStorage.setItem('avatar', JSON.stringify(avatar));
       } catch {
         console.log("Error updating user byte.")
       }
 }
 
 function forfeit() {
-    const userByte = localStorage.getItem("userByte");
+    const userByte = avatar.byte;
     var scoreAdjust = getRandomInteger(3, 13);
     var newUserByte = updateByteText(userByte, -scoreAdjust);
     updateUserByte(newUserByte.substring(0, newUserByte.indexOf(' ')));
@@ -217,7 +202,6 @@ async function createDialogue(userName, chalName) {
     var testPrompt = `${userName} vs. ${chalName}`;
     var response = await generateDialogue(testPrompt);
     var dialogue = await parseDialogue(response);
-    console.log(dialogue);
     return dialogue;
 }
 
@@ -279,7 +263,6 @@ function parseDialogue(text) {
     var winner = null;
     if (match) {
         winner = match[1];
-        console.log(winner);
     } else {
         console.log("Winner not found");
     }

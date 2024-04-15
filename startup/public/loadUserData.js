@@ -6,6 +6,9 @@ const avatarJson = localStorage.getItem('avatar');
 const user = JSON.parse(userJson);
 const avatar = JSON.parse(avatarJson);
 
+const userNameEl = document.querySelector('.userName');
+const userAvatar = document.querySelector('#userAvatar');
+
 (async () => {
     if (user) {
       setDisplay('loginControls', 'none');
@@ -29,37 +32,6 @@ function getSynthPrompt(len) {
     return reducedPrompt;
 }
 
-async function getUserByte() {
-    var userName = user.userName ?? 'Guest';
-
-    const options = {
-        method: 'GET',
-        headers: {
-          accept: 'application/json',
-          'content-type': 'application/json',
-        },
-    };
-
-    console.log(options);
-      
-    try {
-        const response = await fetch(`/api/score?playerName=${userName}`, options);
-        scoreReply = await response.json();
-    
-        if (scoreReply.score == null || scoreReply.score == undefined) {
-            localStorage.setItem('userByte', 25);
-        } else {
-            localStorage.setItem('userByte', scoreReply.score);
-        }
-
-      } catch {
-        console.log("Error getting user byte.")
-      }
-
-      setUserByte();
-
-}
-
 function setUserByte() {
     const userByte = document.querySelector('.userByte');
     if (avatar.byte == null || avatar.byte == "null") {
@@ -69,26 +41,17 @@ function setUserByte() {
     }
 }
 
-const userNameEl = document.querySelector('.userName');
-
 if (window.location.pathname.split("/").pop() == "battle.html") {
     userNameEl.textContent = getSynthPrompt(battlePromptLength);
 } else {
     userNameEl.textContent = getSynthPrompt(defaultPromptLength);
 }
 
-const userAvatar = document.querySelector('#userAvatar');
-
 if (avatar.image != null) {
     userAvatar.src = avatar.image;
 }
 
-if (avatar.byte == null || avatar.byte == "undefined") {
-    console.log("Getting user byte");
-    getUserByte();
-} else {
-    setUserByte();
-}
+setUserByte();
 
 function setDisplay(controlId, display) {
     const displayEls = document.querySelectorAll(`.${controlId}`);
