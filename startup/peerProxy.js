@@ -3,6 +3,7 @@ import { v4 as uuid } from "uuid";
 import { default as config } from "./openAIConfig.json" assert { type: "json" };
 
 var games = {};
+const connectionGameMap = new Map()
 
 export function peerProxy(httpServer) {
     const wss = new WebSocketServer({ noServer: true });
@@ -39,6 +40,8 @@ export function peerProxy(httpServer) {
                 games[gameId].users.push(user);
             }
 
+            connectionGameMap.set(ws, gameId);
+
             if (games[gameId].ready) {
                 console.log("Game is full, starting game session");
                 var dialogue = await getBattleDialogue(games[gameId].users[0].prompt, games[gameId].users[1].prompt);
@@ -54,6 +57,14 @@ export function peerProxy(httpServer) {
                 delete games[gameId];
             }
 
+        });
+
+        ws.on('close', function close() {
+            const gameId = connectionGameMap.get(ws);
+            if (games[gameId]) {
+                delete games[gameId];
+            }
+            connectionGameMap.delete(ws);
         });
     });
 }

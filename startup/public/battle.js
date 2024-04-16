@@ -1,5 +1,7 @@
 var winner = true;
+var oppConnected = false;
 var scoreAdjust = getRandomInteger(3, 13);
+var socket = null;
 
 var API_KEY = null;
 var BASE_PROMPT = null;
@@ -8,6 +10,7 @@ var PLAYER_NAME = "";
 
 const userAvatarBattleEl = document.querySelector(".userAvatarBattle");
 const chalAvatarBattleEl = document.querySelector(".chalAvatarBattle");
+const forfeitButton = document.querySelector(".forfeit")
 const userByte = document.querySelector(".userByte");
 const chalByte = document.querySelector(".chalByte");
 const dialogueEl = document.querySelector(".dialogue");
@@ -24,23 +27,14 @@ async function initializeConfig() {
     PLAYER_NAME = user.userName;
 }
 
-window.onbeforeunload = function() {
-    localStorage.removeItem('opponent');
-}
-
 async function startBattle(dialogue=null) {
     if (API_KEY == null || BASE_PROMPT == null) {
         await initializeConfig();
     }
 
-    console.log("Starting!");
-
     if (dialogue == null) {
-        console.log("Creating dialogue because none was provided.");
         dialogue = await createDialogue(avatar.prompt, opponent.prompt);
     }
-    
-    console.log("Winner: " + dialogue[3]);
 
     if (dialogue[3] == "1") {
         winner = true;
@@ -79,7 +73,6 @@ async function initAnim(dialogue) {
 }
 
 async function battleEndAnim() {
-    const forfeitButton = document.querySelector(".forfeit")
     forfeitButton.classList.add("vs-fadeAnim");
     forfeitButton.removeAttribute("href");
     document.querySelector("#battleTitle").textContent = "Battle Complete!";
@@ -150,9 +143,11 @@ async function updateUserByte(newScore) {
 }
 
 async function forfeit() {
-    const userByte = avatar.byte;
-    var newUserByte = updateByteText(userByte, -scoreAdjust);
-    await updateUserByte(newUserByte.substring(0, newUserByte.indexOf(' ')));
+    if (oppConnected) {
+        const userByte = avatar.byte;
+        var newUserByte = updateByteText(userByte, -scoreAdjust);
+        await updateUserByte(newUserByte.substring(0, newUserByte.indexOf(' ')));
+    }
     window.location.href = "index.html";
 }
 
@@ -277,34 +272,37 @@ function parseDialogue(text) {
 
 async function configureWebSocket() {
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-    var socket = new WebSocket(`${protocol}://${window.location.host}/api/ws`);
+    socket = new WebSocket(`${protocol}://${window.location.host}/api/ws`);
     socket.onopen = (event) => {
-        console.log('Connected to WebSocket');
         socket.send(JSON.stringify({ user: { prompt: avatar.prompt, byte: avatar.byte, image: avatar.image } }));
     };
 
-    socket.onclose = (event) => {
-        console.log('Disconnected from WebSocket');
-    };
-
     socket.onmessage = async (event) => {
+        oppConnected = true;
         const msg = JSON.parse(await event.data);
         localStorage.setItem('opponent', JSON.stringify(msg.opponent));
         
         battleTitleEl.textContent = "Battle Start!";
+        forfeitButton.textContent = "Forfeit (Return)";
         chalName.textContent = msg.opponent.prompt;
         chalAvatar.src = msg.opponent.image;
         chalByte.textContent = msg.opponent.byte + " Byte";
 
         scoreAdjust = msg.scoreAdjust;
 
-        console.log(msg.dialogue);
-
         startBattle(msg.dialogue);
         socket.close();
     };
     return socket;
 }
+
+window.onbeforeunload = function() {
+    if (socket) {
+        socket.onclose = function () {};
+        socket.close();
+    }
+    localStorage.removeItem('opponent');
+};
 
 
 const chalName = document.querySelector(".chalName");
@@ -327,10 +325,9 @@ if (!opponent) {
     
     // Chosen through playground, start battle
 
+    oppConnected = true;
     battleTitleEl.textContent = "Battle Start!";
-
-    console.log(opponent.prompt);
-    console.log(opponent.image);
+    forfeitButton.textContent = "Forfeit (Return)";
 
     chalName.textContent = opponent.prompt;
     chalAvatar.src = opponent.image;
