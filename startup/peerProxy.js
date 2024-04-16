@@ -32,6 +32,17 @@ export function peerProxy(httpServer) {
                     users: [user],
                     ready: false
                 };
+
+                setTimeout(() => {
+                    if (!games[gameId].ready) {
+                        const botUser = getRandomBot();
+                        games[gameId].users.push(botUser);
+                        games[gameId].ready = true;
+                        startGame(gameId);
+                    }
+                }, 15000);
+
+
             } else {
                 // Add player to existing game session
                 games[gameId].clients.push(ws);
@@ -42,17 +53,7 @@ export function peerProxy(httpServer) {
 
             // If both players are connected, start the game
             if (games[gameId].ready) {
-                var dialogue = await getBattleDialogue(games[gameId].users[0].prompt, games[gameId].users[1].prompt);
-                const scoreAdjust = getRandomInteger(3, 13);
-                games[gameId].clients.forEach((player, index) => {
-                    const opponentIndex = (index + 1) % 2;
-                    if (index == 1) {
-                        dialogue[3] = dialogue[3] === "1" ? "2" : "1";
-                    }
-                    player.send(JSON.stringify({ type: 'message', opponent: games[gameId].users[opponentIndex], 
-                        scoreAdjust: scoreAdjust, dialogue: dialogue }));
-                });
-                delete games[gameId];
+                startGame(gameId);
             }
 
         });
@@ -65,6 +66,20 @@ export function peerProxy(httpServer) {
             connectionGameMap.delete(ws);
         });
     });
+}
+
+async function startGame(gameId) {
+    var dialogue = await getBattleDialogue(games[gameId].users[0].prompt, games[gameId].users[1].prompt);
+    const scoreAdjust = getRandomInteger(3, 13);
+    games[gameId].clients.forEach((player, index) => {
+        const opponentIndex = (index + 1) % 2;
+        if (index == 1) {
+            dialogue[3] = dialogue[3] === "1" ? "2" : "1";
+        }
+        player.send(JSON.stringify({ type: 'message', opponent: games[gameId].users[opponentIndex], 
+            scoreAdjust: scoreAdjust, dialogue: dialogue }));
+    });
+    delete games[gameId];
 }
 
 function getAvailableGame() {
@@ -154,4 +169,18 @@ function parseDialogue(text) {
 
 function getRandomInteger(min, max) {
     return Math.round(Math.random() * (max - min) + min);
+}
+
+function getRandomBot() {
+    var builtIn = [
+        { prompt: "Dog with a Jetpack", byte: 25, image: "assets/images/builtInOpps/dog-jetpack.png" },
+        { prompt: "Very Patriotic Turtle", byte: 25, image: "assets/images/builtInOpps/patriotic-turtle.png" },
+        { prompt: "Gordon Ramsay as a Nun", byte: 25, image: "assets/images/builtInOpps/gordon-ramsay-nun.png" },
+        { prompt: "Randy the Construction Worker", byte: 25, image: "assets/images/builtInOpps/randy-worker.png" },
+        { prompt: "Kermit the Frog", byte: 25, image: "assets/images/builtInOpps/kermit.png" },
+        { prompt: "Time Itself", byte: 25, image: "assets/images/builtInOpps/time.png" },
+        { prompt: "Someone Who Eats Their Vegetables", byte: 25, image: "assets/images/builtInOpps/eats-vegetables.png" },
+        { prompt: "Bobby McTobby", byte: 25, image: "assets/images/builtInOpps/bobby-mctobby.png" }
+    ];
+    return builtIn[Math.floor(Math.random() * builtIn.length)];
 }
