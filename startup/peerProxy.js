@@ -1,6 +1,6 @@
 import { WebSocketServer } from "ws";
 import { v4 as uuid } from "uuid";
-import { default as config } from "./openAIConfig.json" assert { type: "json" };
+import { default as config } from "./apiConfig.json" assert { type: "json" };
 
 var games = {};
 const connectionGameMap = new Map()

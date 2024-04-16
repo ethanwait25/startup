@@ -5,6 +5,7 @@ import express from "express";
 const app = express();
 import * as DB from "./database.js";
 import { peerProxy } from "./peerProxy.js";
+import { default as config } from "./apiConfig.json" assert { type: "json" };
 
 const authCookieName = 'token';
 
@@ -19,14 +20,6 @@ app.use(cookieParser());
 
 // Serve up the front-end static content hosting
 app.use(express.static('public'));
-
-// Starts Prodia proxy server
-const proxyServer = exec("lcp --proxyUrl https://api.prodia.com");
-
-process.on("SIGINT", () => {
-  proxyServer.kill();
-  process.exit(0);
-});
 
 // Reset logged in users
 DB.resetLoggedIn();
@@ -101,7 +94,8 @@ secureApiRouter.use(async (req, res, next) => {
 
 // CREATE AVATAR
 apiRouter.post('/avatar', async (req, res) => {
-  const avatar = await DB.createAvatar(req.body.username, req.body.prompt, req.body.image);
+  const imageUrl = await processPrompt(req.body.prompt);
+  const avatar = await DB.createAvatar(req.body.username, req.body.prompt, imageUrl);
   DB.addLoggedIn(avatar);
   res.status(200).send(avatar);
 });
@@ -153,3 +147,64 @@ const httpService = app.listen(port, () => {
 });
 
 peerProxy(httpService);
+
+
+// Handle the Prodia API calls
+async function processPrompt(prompt) {
+  try {
+    const job = await createGeneration(prompt);
+    const imageUrl = await getGeneratedImageUrl(job);
+
+    if (imageUrl != null) {
+        return imageUrl;
+    } else {
+        throw new Error("Error!");
+    }
+
+  } catch(err) {
+    console.error(err);
+    return "https://fakeimg.pl/300x300?text=Error!}";
+  }
+}
+
+async function createGeneration(userPrompt) {
+  const options = {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/json',
+        'X-Prodia-Key': config.prodiaKey
+      },
+      body: JSON.stringify({ prompt: `${userPrompt}`, model: `${config.model}` })
+    };
+    
+  const job = await fetch('https://api.prodia.com/v1/sd/generate', options)
+      .then(response => response.json())
+      .then(response => {
+        return response.job;
+      })
+      .catch(err => console.error(err));
+  return job;
+}
+
+async function getGeneratedImageUrl(job) {
+  const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/json',
+        'X-Prodia-Key': config.prodiaKey
+      },
+    };
+    
+  var response = null;
+  do {
+  response = await fetch(`https://api.prodia.com/v1/job/${job}`, options)
+      .then(response => response.json())
+      .then(response => {
+        return response;
+      })
+      .catch(err => console.error(err));
+  } while(response.status != "succeeded");
+  return response.imageUrl;
+}

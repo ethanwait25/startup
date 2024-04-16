@@ -3,4 +3,4 @@
 node_modules/
 public/config.json
 dbConfig.json
-openAIConfig.json
+apiConfig.json
