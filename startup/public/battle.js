@@ -59,6 +59,8 @@ async function initAnim(dialogue) {
     dialogueEl.classList.remove("vs-fadeAnim");
     resetAnimation(dialogueEl);
 
+    console.log(dialogue);
+
     await setDialogue(dialogue[0]);
     await setDialogue(dialogue[1]);
     await setDialogue(dialogue[2]);
@@ -160,9 +162,13 @@ function updateByteText(curByte, adjust) {
 }
 
 async function setDialogue(text, requireClick = true) {
+    console.log("Setting dialogue: " + text);
     dialogueEl.textContent = text;
+    console.log("Setting dialogueEnter");
     dialogueEl.classList.add("dialogueEnter");
+    console.log("Calling waitforAnimation");
     await waitforAnimation(dialogueEl);
+    console.log("Finished calling waitforAnimation");
     if (requireClick) {
         await waitforClick();
     }

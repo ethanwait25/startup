@@ -34,7 +34,7 @@ export function peerProxy(httpServer) {
                 };
 
                 setTimeout(() => {
-                    if (!games[gameId].ready) {
+                    if (!games[gameId].ready && ws.readyState === ws.OPEN) {
                         const botUser = getRandomBot();
                         games[gameId].users.push(botUser);
                         games[gameId].ready = true;
