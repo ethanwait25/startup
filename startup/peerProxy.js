@@ -27,7 +27,6 @@ export function peerProxy(httpServer) {
             if (!gameId) {
                 // Game does not exist, create a new game session
                 gameId = Object.keys(games).length + 1;
-                console.log("Creating new game session: ", gameId);
                 games[gameId] = {
                     clients: [ws],
                     users: [user],
@@ -35,15 +34,14 @@ export function peerProxy(httpServer) {
                 };
             } else {
                 // Add player to existing game session
-                console.log("Adding second player to game session: ", gameId);
                 games[gameId].clients.push(ws);
                 games[gameId].users.push(user);
             }
 
             connectionGameMap.set(ws, gameId);
 
+            // If both players are connected, start the game
             if (games[gameId].ready) {
-                console.log("Game is full, starting game session");
                 var dialogue = await getBattleDialogue(games[gameId].users[0].prompt, games[gameId].users[1].prompt);
                 const scoreAdjust = getRandomInteger(3, 13);
                 games[gameId].clients.forEach((player, index) => {

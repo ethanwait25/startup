@@ -331,6 +331,7 @@ if (!opponent) {
 
     chalName.textContent = opponent.prompt;
     chalAvatar.src = opponent.image;
+    chalByte.textContent = opponent.byte + " Byte";
 
     startBattle();
 
