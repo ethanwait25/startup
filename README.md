@@ -87,3 +87,11 @@ For this deliverable, I configured the database which persistently stores user d
 * <b>Login functionality</b> - Existing users can now login, which loads their database data into local storage and provides access to secure API calls.
 * <b>MongoDB credential storage</b> - The database stores encrypted credentials for each user, which it compares to user-entered credentials to determine authentication.
 * <b>Restricts functionality</b> - Users not logged in will not be able to access "Fight" or "Playground" functionality.
+
+## WebSocket Deliverable
+For this deliverable, I used WebSocket to get the application working as a fully-functional multiplayer game! WebSocket is used to place players waiting for a game into sessions with one another, and ensures that they all receive the same battle dialogue and score adjustment. I'm so excited about how this turned out!
+
+* <b>Backend listens for WebSocket connection</b> - Done!
+* <b>Frontend makes WebSocket connection</b> - Done! When a user joins a fight without selecting an opponent from the playground, the client makes a new WebSocket connection with the server. 
+* <b>Data sent over WebSocket connection</b> - Done! If another user attempts to join a session, the two are paired together. If after 15 seconds, no other user has joined, the server sends back one of many random default opponents.
+* <b>WebSocket data displayed</b> - Once the data is sent back to the clients, the client uses it to render the opponent's name, image, and score. The same battle dialogue and score adjustment is used for both clients in the session.
