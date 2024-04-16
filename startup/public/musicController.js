@@ -1,7 +1,8 @@
 const musicDescriptions = [
     { file: "syntheticshowdown.mp3", name: "Synthetic Showdown" },
-    { file: "amotherslove.mp3", name: "A Mother's Love" },
+    { file: "amotherslove.mp3", name: "Point of No Return" },
     { file: "toreador.mp3", name: "Toreador March" },
+    { file: "griptape.mp3", name: "Griptape" },
 ];
 
 class musicController {
