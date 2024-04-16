@@ -48,17 +48,27 @@ async function startBattle(dialogue=null) {
 }
 
 async function initAnim(dialogue) {
+
+    console.log("Starting initAnim");
     
     userAvatarBattleEl.classList.add("userAvatarAnim");
     chalAvatarBattleEl.classList.add("chalAvatarAnim");
     dialogueEl.classList.add("vs-fadeAnim");
 
+    console.log("Starting waitforAnimation");
+
+    console.log("Waiting for dialogueEl");
     await waitforAnimation(dialogueEl);
+    console.log("Waiting for userAvatarBattleEl");
     await waitforAnimation(userAvatarBattleEl);
+    console.log("Waiting for chalAvatarBattleEl");
     await waitforAnimation(chalAvatarBattleEl);
+    console.log("Removing class");
     dialogueEl.classList.remove("vs-fadeAnim");
+    console.log("Resetting animation");
     resetAnimation(dialogueEl);
 
+    console.log("Let's see what the dialogue is...")
     console.log(dialogue);
 
     await setDialogue(dialogue[0]);
@@ -176,14 +186,20 @@ async function setDialogue(text, requireClick = true) {
     resetAnimation(dialogueEl);
 }
 
-function waitforAnimation(element) {
+function waitforAnimation(element, timeout=3000) {
     return new Promise(resolve => {
         function handleAnimationEnd() {
             element.removeEventListener('animationend', handleAnimationEnd);
+            clearTimeout(animationTimeout);
             resolve();
         }
 
         element.addEventListener('animationend', handleAnimationEnd);
+
+        var animationTimeout = setTimeout(() => {
+            console.log("Animation timeout");
+            resolve();
+        }, timeout);
     });
 }
 
