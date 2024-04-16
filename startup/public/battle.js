@@ -8,6 +8,8 @@ var PLAYER_NAME = "";
 
 const userAvatarBattleEl = document.querySelector(".userAvatarBattle");
 const chalAvatarBattleEl = document.querySelector(".chalAvatarBattle");
+const userByte = document.querySelector(".userByte");
+const chalByte = document.querySelector(".chalByte");
 const dialogueEl = document.querySelector(".dialogue");
 
 async function initializeConfig() {
@@ -81,9 +83,6 @@ async function battleEndAnim() {
     forfeitButton.classList.add("vs-fadeAnim");
     forfeitButton.removeAttribute("href");
     document.querySelector("#battleTitle").textContent = "Battle Complete!";
-
-    const userByte = document.querySelector(".userByte");
-    const chalByte = document.querySelector(".chalByte");
 
     if (winner == true) {
         userAvatarBattleEl.classList.add("userAvatarWinAnim");
@@ -295,6 +294,7 @@ async function configureWebSocket() {
         battleTitleEl.textContent = "Battle Start!";
         chalName.textContent = msg.opponent.prompt;
         chalAvatar.src = msg.opponent.image;
+        chalByte.textContent = msg.opponent.byte + " Byte";
 
         scoreAdjust = msg.scoreAdjust;
 
