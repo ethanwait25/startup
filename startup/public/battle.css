@@ -96,6 +96,7 @@ img {
 .dialogueBox {
 	padding: 3em;
 	position: absolute;
+	max-width: 80vw;
 }
 
 .dialogueBox h1 {
