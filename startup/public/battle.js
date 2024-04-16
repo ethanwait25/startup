@@ -1,4 +1,5 @@
 var winner = true;
+var scoreAdjust = getRandomInteger(3, 13);
 
 var API_KEY = null;
 var BASE_PROMPT = null;
@@ -30,9 +31,14 @@ async function startBattle(dialogue=null) {
         await initializeConfig();
     }
 
+    console.log("Starting!");
+
     if (dialogue == null) {
-        var dialogue = await createDialogue(avatar.prompt, opponent.prompt);
+        console.log("Creating dialogue because none was provided.");
+        dialogue = await createDialogue(avatar.prompt, opponent.prompt);
     }
+    
+    console.log("Winner: " + dialogue[3]);
 
     if (dialogue[3] == "1") {
         winner = true;
@@ -76,7 +82,6 @@ async function battleEndAnim() {
     forfeitButton.removeAttribute("href");
     document.querySelector("#battleTitle").textContent = "Battle Complete!";
 
-    var scoreAdjust = getRandomInteger(3, 13);
     const userByte = document.querySelector(".userByte");
     const chalByte = document.querySelector(".chalByte");
 
@@ -147,7 +152,6 @@ async function updateUserByte(newScore) {
 
 async function forfeit() {
     const userByte = avatar.byte;
-    var scoreAdjust = getRandomInteger(3, 13);
     var newUserByte = updateByteText(userByte, -scoreAdjust);
     await updateUserByte(newUserByte.substring(0, newUserByte.indexOf(' ')));
     window.location.href = "index.html";
@@ -274,9 +278,10 @@ function parseDialogue(text) {
 
 async function configureWebSocket() {
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-    var socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    var socket = new WebSocket(`${protocol}://${window.location.host}/api/ws`);
     socket.onopen = (event) => {
         console.log('Connected to WebSocket');
+        socket.send(JSON.stringify({ user: { prompt: avatar.prompt, byte: avatar.byte, image: avatar.image } }));
     };
 
     socket.onclose = (event) => {
@@ -284,16 +289,21 @@ async function configureWebSocket() {
     };
 
     socket.onmessage = async (event) => {
-        const msg = JSON.parse(await event.data.text());
+        const msg = JSON.parse(await event.data);
         localStorage.setItem('opponent', JSON.stringify(msg.opponent));
         
         battleTitleEl.textContent = "Battle Start!";
         chalName.textContent = msg.opponent.prompt;
         chalAvatar.src = msg.opponent.image;
 
-        initAnim(msg.dialogue);
+        scoreAdjust = msg.scoreAdjust;
+
+        console.log(msg.dialogue);
+
+        startBattle(msg.dialogue);
         socket.close();
     };
+    return socket;
 }
 
 
@@ -305,13 +315,13 @@ var opponent = JSON.parse(opponentJson);
 
 initializeConfig();
 
+
 // Not chosen through playground
 if (!opponent) {
     battleTitleEl.textContent = "Waiting for opponent...";
 
     // Get opponent through WebSocket
     configureWebSocket();
-    socket.send(JSON.stringify({ user: { prompt: avatar.prompt, byte: avatar.byte, image: avatar.image } }));
 
 } else {
     
@@ -328,5 +338,3 @@ if (!opponent) {
     startBattle();
 
 }
-
-

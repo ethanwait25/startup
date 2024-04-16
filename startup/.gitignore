@@ -1,5 +1,6 @@
 .vscode/
 .DS_Store
-mongoTest/dbConfig.json
 node_modules/
 public/config.json
+dbConfig.json
+openAIConfig.json
