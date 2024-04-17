@@ -2,5 +2,6 @@
 .DS_Store
 node_modules/
 public/config.json
-dbConfig.json
-apiConfig.json
+service/dbConfig.json
+service/apiConfig.json
+src/config.json
