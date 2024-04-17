@@ -27,6 +27,10 @@ div.userHeader {
     width: 300px;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 #userAvatar {
     width: 125px;
     height: 125px;
