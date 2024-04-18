@@ -6,11 +6,16 @@ import { Fight } from './fight/fight.jsx';
 import { Home } from './home/home.jsx';
 import { Login } from './login/login.jsx';
 import { Playground } from './playground/playground.jsx';
+import { AuthState } from './login/authState.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './app.css';
+// import './app.css';
 import './home/home.css';
 
 export default function App() {
+    const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
+    const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+    const [authState, setAuthState] = React.useState(currentAuthState);
+
   return (
     <BrowserRouter>
         <header>
