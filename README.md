@@ -95,3 +95,11 @@ For this deliverable, I used WebSocket to get the application working as a fully
 * <b>Frontend makes WebSocket connection</b> - Done! When a user joins a fight without selecting an opponent from the playground, the client makes a new WebSocket connection with the server. 
 * <b>Data sent over WebSocket connection</b> - Done! If another user attempts to join a session, the two are paired together. If after 15 seconds, no other user has joined, the server sends back one of many random default opponents.
 * <b>WebSocket data displayed</b> - Once the data is sent back to the clients, the client uses it to render the opponent's name, image, and score. The same battle dialogue and score adjustment is used for both clients in the session.
+
+## React Deliverable
+For this deliverable, I converted my WebApp over to use React. It was killer, man. Not my favorite part of this project, but it was good experience. I got most of my site ported over.
+
+* <b>Bundled using Vite</b> - Done!
+* <b>Multiple functional React components</b> - I do have the majority of my site working through React. Along with all my major pages, my account creation, login, playground, battle music controller, etc. functionality all work as intended. All that doesn't work is the battle animations with the displayed text - animations were a pain to figure out with React.
+* <b>React router</b> - Routing between all major components of the site.
+* <b>React hooks</b> - I use React hooks for several things in this deliverable. For example, all user data is dynamically updated based on authentication. Each piece of user data and the authentication itself uses React hooks. Much of the functionality of the music controller also utilizes React hooks (current file, title, play/mute state, etc.)
