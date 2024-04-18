@@ -45,7 +45,7 @@ async function register(event) {
   if (response.ok) {
     localStorage.setItem('user', JSON.stringify({ userName: userName, email: email }));
     localStorage.setItem('avatar', 'null');
-    window.location.href = "create.html";
+    window.location.href = "/create";
     return true;
   } else {
     const body = await response.json();

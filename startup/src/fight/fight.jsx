@@ -23,8 +23,8 @@ export function Fight() {
             <img id="chalAvatar" alt="Challenger!" src="assets/images/default-user.jpg" />
           </div>
           <div className="chalStats">
-            <p className="chalName">&nbsp</p>
-            <p className="chalByte">&nbsp</p>
+            <p className="chalName">&nbsp;</p>
+            <p className="chalByte">&nbsp;</p>
           </div>
         </div>
       </div>
