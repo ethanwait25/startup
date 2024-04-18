@@ -2,7 +2,8 @@ import React from 'react';
 import './battle.css';
 
 export function Fight() {
-  return (
+
+return (
     <main>
       <h1 id="battleTitle"></h1>
       <div className="battleHeaders">
@@ -29,8 +30,14 @@ export function Fight() {
         </div>
       </div>
       <div className="forfeitButton">
-        <a className="forfeit">Leave Arena</a>
-        {/* <a className="forfeit" style="cursor: pointer" onclick="forfeit()">Leave Arena</a> */}
+        <a className="forfeit" href="/">Leave Arena</a>
+      </div>
+      <div class="musicBox">
+          <p id="trackName"></p>
+          <div class="musicControls">
+              <img alt="play" id="toggleMusic" src="assets/images/play.svg" onClick="toggleMusic()"></img>
+              <img alt="skip" id="skipMusic" src="assets/images/skip.svg" onClick="skipTrack()"></img>
+          </div>
       </div>
     </main>
   );

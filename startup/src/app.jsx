@@ -80,6 +80,8 @@ export default function App() {
                     <NavLink to="https://github.com/ethanwait25/startup">GitHub</NavLink>
                 </footer>
             </div>
+
+            
         </BrowserRouter>
     );
 
